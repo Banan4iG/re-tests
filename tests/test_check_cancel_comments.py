@@ -5,7 +5,7 @@ import pyautogui
 
 def test_1(open_connection):
     lackey.click("tab_query_editor.png")
-    lackey.click("tab_query_editor_text.png")
+    lackey.click("tab_query_editor_empty_text.png")
     lackey.type("select * from employee;{ENTER}select * from employee;")
     lackey.type("a", lackey.Key.CTRL)
     pyautogui.hotkey('ctrl', '/')

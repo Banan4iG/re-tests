@@ -30,11 +30,10 @@ def create_connection():
     
     image_path = ["files/images/"]
 
-    #code for the future
-    # if platform.system() == "Windows":
-    #     image_path += ["Windows/"]
-    # else:
-    #     image_path += ["Linux/"]
+    if platform.system() == "Windows":
+         image_path[0] += "Windows/"
+    else:
+         image_path[0] += "Linux/"
     
     lackey.SettingsMaster.ImagePaths = image_path
     lackey.SettingsMaster.MinSimilarity = 0.97

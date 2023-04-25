@@ -17,7 +17,7 @@ def test_1(open_connection):
     lackey.click("tree_SELECT_SQL_menu.png")
     time.sleep(2)
     lackey.type("z", lackey.Key.CTRL)
-    assert lackey.find("tab_query_editor_text.png") != None
+    assert lackey.find("tab_query_editor_empty_text.png") != None
 
 def test_2(open_connection):
     move_location = action()
@@ -26,7 +26,7 @@ def test_2(open_connection):
     lackey.click("tree_INSERT_SQL_menu.png")
     time.sleep(2)
     lackey.type("z", lackey.Key.CTRL)
-    assert lackey.find("tab_query_editor_text.png") != None
+    assert lackey.find("tab_query_editor_empty_text.png") != None
 
 def test_3(open_connection):
     move_location = action()
@@ -35,7 +35,7 @@ def test_3(open_connection):
     lackey.click("tree_UPDATE_SQL_menu.png")
     time.sleep(2)
     lackey.type("z", lackey.Key.CTRL)
-    assert lackey.find("tab_query_editor_text.png") != None
+    assert lackey.find("tab_query_editor_empty_text.png") != None
 
 def test_4(open_connection):
     move_location = action()
@@ -44,4 +44,4 @@ def test_4(open_connection):
     lackey.click("tree_CREATE_TABLE_SQL_menu.png")
     time.sleep(2)
     lackey.type("z", lackey.Key.CTRL)
-    assert lackey.find("tab_query_editor_text.png") != None
+    assert lackey.find("tab_query_editor_empty_text.png") != None
