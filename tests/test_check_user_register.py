@@ -3,6 +3,14 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
+def check_user(number):
+    lackey.rightClick("tree_user_name" + str(number) + ".png")
+    lackey.click("tree_edit_menu.png")
+    lackey.click("tab_ddl_to_create.png")
+    result = lackey.exists("sql_text_user" + str(number) + ".png")
+    lackey.click("bt_OK.png")
+    return result
+
 def test_1(open_connection):
     with fdb.connect(database='localhost:employee', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
         cur = con.cursor()
@@ -16,16 +24,8 @@ def test_1(open_connection):
     lackey.click("tree_reload_menu.png")
     all_plus = lackey.findAll("tree_plus.png")
     lackey.click(list(all_plus)[8])
-    lackey.rightClick("tree_user_name1.png")
-    lackey.click("tree_edit_menu.png")
-    lackey.click("tab_SQL.png")
-    result1 = lackey.exists("sql_text_user1.png")
-    lackey.click("bt_OK.png")
-    lackey.rightClick("tree_user_name2.png")
-    lackey.click("tree_edit_menu.png")
-    lackey.click("tab_SQL.png")
-    result2 = lackey.exists("sql_text_user2.png")
-    lackey.click("bt_OK.png")
+    result1 = check_user(1)
+    result2 = check_user(2)
 
     with fdb.connect(database='localhost:employee', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
         cur = con.cursor()
