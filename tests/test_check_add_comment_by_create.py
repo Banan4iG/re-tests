@@ -17,7 +17,7 @@ def click_tab_comment(MinSimilarity=0.97):
     lackey.click(mouse.getPos().below(100))
     lackey.type("test comment")
     lackey.click("bt_OK.png")
-    result1 = len(list(lackey.findAll("green_circle.png")))
+    result1 = len(list(lackey.findAll("text_success.png")))
     result2 = lackey.exists("text_test_comment.png")
     lackey.click("bt_rollback.png")
     lackey.click("bt_cancel.png")
