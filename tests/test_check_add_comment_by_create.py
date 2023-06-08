@@ -31,7 +31,9 @@ def test_create_domain(open_connection):
 
 def test_create_table(open_connection):
     init_create("icon_tables.png")
+    lackey.SettingsMaster.MinSimilarity = 0.96
     lackey.click(lackey.exists("table_colum_Name.png").getTarget().below(20))
+    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.type("test")
     lackey.click(lackey.exists("table_colum_Datatype.png").getTarget().below(20))
     lackey.click("datatype_BIGINT.png")
