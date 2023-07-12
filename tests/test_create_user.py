@@ -26,4 +26,5 @@ def test_check_paste_from_clipboard(open_connection):
     lackey.type("v", lackey.Key.CTRL)
     result = lackey.exists("text_input_password_visible.png")
     lackey.click("bt_cancel.png")
+    lackey.click("bt_yes.png")
     assert result != None
