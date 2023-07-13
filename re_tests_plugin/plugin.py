@@ -3,6 +3,8 @@ import lackey
 import time
 import platform
 
+def plus_find(name_of_the_group):
+    return lackey.exists(name_of_the_group).getTarget().left(25)
 
 ADMIN_NAME = 'sysdba'
 ADMIN_PASSWORD = 'masterkey'
