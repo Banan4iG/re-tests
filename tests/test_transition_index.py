@@ -10,7 +10,9 @@ def test_transition_index(open_connection):
     lackey.doubleClick("tree_table_name_EMPLOYEE.png")
     lackey.click("indices.png")
     lackey.doubleClick("column_name_EMP_NO.png")
+    lackey.SettingsMaster.MinSimilarity = 0.92
     result = lackey.exists("edit_index.png")
+    lackey.SettingsMaster.MinSimilarity = 0.97
     time.sleep(4)
     lackey.click("bt_cancel.png")
     lackey.rightClick("tab_table_EMPLOYEE_blue.png")
