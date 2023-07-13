@@ -22,8 +22,8 @@ def test_1(open_connection):
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_users.png")
     lackey.click("tree_reload_menu.png")
-    all_plus = lackey.findAll("tree_plus.png")
-    lackey.click(list(all_plus)[8])
+    name_of_the_group = "icon_users.png"
+    lackey.click(plus_find(name_of_the_group))
     result1 = check_user(1)
     result2 = check_user(2)
 
