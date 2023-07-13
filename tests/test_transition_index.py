@@ -5,7 +5,7 @@ from re_tests_plugin import *
 
 def test_transition_index(open_connection):
     lackey.click("tree_plus.png")
-    ame_of_the_group = "icon_tables.png"
+    name_of_the_group = "icon_tables.png"
     lackey.click(plus_find(name_of_the_group))
     lackey.doubleClick("tree_table_name_EMPLOYEE.png")
     lackey.click("indices.png")
