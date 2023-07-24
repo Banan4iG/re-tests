@@ -174,4 +174,4 @@ def test_2(open_connection):
     lackey.rightClick("tab_trace_manager_blue.png")
     lackey.click("bt_tab_close_all.png")
 
-    os.remove("D:/test_conf.conf")
+os.remove("D:/test_conf.conf")
