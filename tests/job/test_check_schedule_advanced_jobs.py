@@ -4,8 +4,9 @@ from re_tests_plugin import *
 check_dict = {}
 
 def every_checking(time):
+    lackey.click("every.png")
     check_dict[time] = [0, 1, 2]
-    lackey.click(time + "_every_tick.png")
+    lackey.type(lackey.Key.UP)
     check_dict[time][0] = lackey.exists(time + "_every_tick_checking.png")
     lackey.click("every.png")
     lackey.click("every_block_tickes.png")
