@@ -34,7 +34,7 @@ def test_settings(open_connection):
     lackey.type(lackey.Key.BACKSPACE) 
     lackey.type("25:00:00.000")
     array_of_buttons_down = list(lackey.findAll("button_down.png"))
-    lackey.click(array_of_buttons_down[1])
+    lackey.click(array_of_buttons_down[3])
     lackey.click("BASH.png")
     lackey.click("Active.png")
     lackey.click("jobs_schedule.png")

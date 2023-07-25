@@ -9,7 +9,9 @@ def every_checking(time):
     lackey.type(lackey.Key.UP)
     check_dict[time][0] = lackey.exists(time + "_every_tick_checking.png")
     lackey.click("every.png")
+    lackey.SettingsMaster.MinSimilarity = 0.93
     lackey.click("every_block_tickes.png")
+    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.click("every_block_tickes_chosen.png")
     lackey.click("starting.png")
     name = "zero" if (time == "min" or time == "hour") else time

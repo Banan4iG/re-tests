@@ -53,10 +53,10 @@ def test_cron(open_connection):
     for i in range(3):
         lackey.click(lackey.exists("button_up_down.png").getTarget().above(5))
     array_of_buttons_down = list(lackey.findAll("button_down.png"))
-    lackey.click(array_of_buttons_down[2])
+    lackey.click(array_of_buttons_down[4])
     lackey.click("button_march.png")
     lackey.click("days.png")
-    lackey.click(array_of_buttons_down[3])
+    lackey.click(array_of_buttons_down[5])
     lackey.click("every_month_days_chosen.png")
     result4 = lackey.exists("every_month_checking.png")
 
@@ -65,7 +65,7 @@ def test_cron(open_connection):
     for i in range(2):
         lackey.click(lackey.exists("button_up_down.png").getTarget().below(5))
     array_of_buttons_down = list(lackey.findAll("button_down.png"))
-    lackey.click(array_of_buttons_down[4])
+    lackey.click(array_of_buttons_down[6])
     lackey.click("to_repeat_job_every_chosen.png")
     result5 = lackey.exists("to_repeat_job_every_checking.png")
 
