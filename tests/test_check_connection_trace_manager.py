@@ -41,12 +41,31 @@ def test_1(open_connection):
     lackey.click("session_manager.png")
     lackey.click("refresh.png")
     lackey.click("visible_columns.png")
-    lackey.click("event_type.png")
+    lackey.click("table_a_lot_left.png")
+    lackey.click("table_runner.png")
+    while (lackey.exists("event_type.png") == None and lackey.exists("event_type_blue.png") == None):
+        lackey.wheel(lackey.Mouse.WHEEL_DOWN, 6)
+    if (lackey.exists("event_type.png")): lackey.click("event_type.png") 
+    else: lackey.click("event_type_blue.png")
     lackey.click("table_right.png")
-    lackey.click("username.png")
+
+
+    lackey.click("table_runner.png")
+    lackey.wheel(lackey.Mouse.WHEEL_UP, 20)
+    while (lackey.exists("username.png") == None and lackey.exists("username_blue.png") == None):
+        lackey.wheel(lackey.Mouse.WHEEL_DOWN, 6)
+    if (lackey.exists("username.png")): lackey.click("username.png") 
+    else: lackey.click("username_blue.png")
     lackey.click("table_right.png")
+
     lackey.click("type_query_service.png")
+    lackey.wheel(lackey.Mouse.WHEEL_UP, 20)
+    while (lackey.exists("type_query_service.png") == None and lackey.exists("type_query_service_blue.png") == None):
+        lackey.wheel(lackey.Mouse.WHEEL_DOWN, 6)
+    if (lackey.exists("type_query_service.png")): lackey.click("type_query_service.png") 
+    else: lackey.click("type_query_service_blue.png")
     lackey.click("table_right.png")
+
     lackey.click("type_query_service.png")
     lackey.click("table_up.png")
     lackey.click("session_manager.png")
