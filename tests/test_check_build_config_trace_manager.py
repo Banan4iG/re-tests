@@ -1,8 +1,7 @@
 import lackey, os
 from re_tests_plugin import *
 
-conf = "test_conf.conf"
-conf_path = os.environ.get('TEMP') + "/" + conf
+conf_path = os.environ.get('TEMP') + "/" + "test_conf.conf"
 check_dict = {}
 def array_filling():    
     check_dict["format"] = ["0", "0"]
