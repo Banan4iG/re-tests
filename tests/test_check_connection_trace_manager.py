@@ -1,10 +1,8 @@
 import lackey, os
 from re_tests_plugin import *
 
-conf = "test_conf.conf"
-conf_path = os.environ.get('TEMP') + "/" + conf
-log = "test_log.fbtrace_text"
-log_path = os.environ.get('TEMP') + "/" + log
+conf_path = os.environ.get('TEMP') + "/" + "test_conf.conf"
+log_path = os.environ.get('TEMP') + "/" + "test_log.fbtrace_text"
 
 def test_1(open_connection):
     lackey.click("tools.png")
