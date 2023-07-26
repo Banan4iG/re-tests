@@ -1,6 +1,11 @@
 import lackey, os
 from re_tests_plugin import *
 
+conf = "test_conf.conf"
+conf_path = os.environ.get('TEMP') + "/" + conf
+log = "test_log.fbtrace_text"
+log_path = os.environ.get('TEMP') + "/" + log
+
 def test_1(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
@@ -13,7 +18,7 @@ def test_1(open_connection):
     lackey.click("just_extra_click.png")
     array_of_bars = list(lackey.findAll("empty_bar.png"))
     lackey.click(array_of_bars[9])
-    lackey.type("D:/test_conf.conf")
+    lackey.type(conf_path)
     lackey.click("save.png")
     result1 = lackey.exists("buildconfig_ok.png")
     lackey.click("buildconfig_ok.png")
@@ -28,9 +33,9 @@ def test_1(open_connection):
     lackey.click(lackey.exists("without_a_tick_use_config_file.png").getTarget().right(300))
     lackey.type("a",lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE) 
-    lackey.type("D:/test_conf.conf")
+    lackey.type(conf_path)
     lackey.click(lackey.exists("without_a_tick_log_to_file.png").getTarget().right(300))
-    lackey.type("D:/test_log.fbtrace_text")
+    lackey.type(log_path)
     lackey.click("start.png")
     lackey.click("buildconfigurationfile.png")
 
@@ -64,7 +69,7 @@ def test_2(open_connection):
     lackey.click("trace_manager.png")
     lackey.click(lackey.exists("open_filelog.png").getTarget().right(60))
     lackey.click("file_name.png")
-    lackey.type("D:/test_log.fbtrace_text")
+    lackey.type(log_path)
     lackey.click("open.png")
     lackey.click(lackey.exists("filter_column.png").getTarget().right(100))
     lackey.click("filter_column_chosen.png")
@@ -81,6 +86,6 @@ def test_2(open_connection):
     assert result2 != None
     assert result3 != None
 
-os.remove("D:/test_conf.conf")
-os.remove("D:/test_log.fbtrace_text")
+if os.path.exists(conf_path): os.remove(conf_path)
+if os.path.exists(log_path): os.remove(log_path)
 

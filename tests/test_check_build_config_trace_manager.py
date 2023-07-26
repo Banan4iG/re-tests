@@ -1,6 +1,8 @@
 import lackey, os
 from re_tests_plugin import *
 
+conf = "test_conf.conf"
+conf_path = os.environ.get('TEMP') + "/" + conf
 check_dict = {}
 def array_filling():    
     check_dict["format"] = ["0", "0"]
@@ -89,13 +91,13 @@ def test_1(open_connection):
     lackey.type("8192")
     array_of_bars = list(lackey.findAll("empty_bar.png"))
     lackey.click(array_of_bars[5])
-    lackey.type("D:/test_conf.conf")
+    lackey.type(conf_path)
     lackey.click("save.png")
     lackey.click("buildconfig_ok.png")
 
     #file check
     array_filling()
-    f = open("D:/test_conf.conf", "r")
+    f = open(conf_path, "r")
     for i in range(3):
         f.readline()
     for i in range(38):
@@ -151,13 +153,13 @@ def test_2(open_connection):
     lackey.type("4096")
     array_of_bars = list(lackey.findAll("empty_bar.png"))
     lackey.click(array_of_bars[5])
-    lackey.type("D:/test_conf.conf")
+    lackey.type(conf_path)
     lackey.click("save.png")
     lackey.click("buildconfig_ok.png")
 
     #file check
     array_filling()
-    f = open("D:/test_conf.conf", "r")
+    f = open(conf_path, "r")
     for i in range(3):
         f.readline()
     for i in range(38):
@@ -174,4 +176,4 @@ def test_2(open_connection):
     lackey.rightClick("tab_trace_manager_blue.png")
     lackey.click("bt_tab_close_all.png")
 
-os.remove("D:/test_conf.conf")
+if os.path.exists(conf_path): os.remove(conf_path)
