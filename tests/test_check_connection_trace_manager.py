@@ -58,7 +58,7 @@ def test_1(open_connection):
     else: lackey.click("username_blue.png")
     lackey.click("table_right.png")
 
-    lackey.click("type_query_service.png")
+    lackey.click("table_runner.png")
     lackey.wheel(lackey.Mouse.WHEEL_UP, 20)
     while (lackey.exists("type_query_service.png") == None and lackey.exists("type_query_service_blue.png") == None):
         lackey.wheel(lackey.Mouse.WHEEL_DOWN, 6)
