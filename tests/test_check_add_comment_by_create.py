@@ -67,6 +67,11 @@ SELECT country FROM country;
 
 def test_create_procedure(open_connection):
     init_create("icon_procedures.png")
+    lackey.click("tab_output_parameters.png")
+    lackey.click(lackey.exists("table_colum_Name.png").getTarget().below(20))
+    lackey.type("test")
+    lackey.click(lackey.exists("table_colum_Datatype.png").getTarget().below(20))
+    lackey.click("datatype_BIGINT.png")
     click_tab_comment()
 
 def test_create_function(open_connection):
