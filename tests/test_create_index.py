@@ -19,7 +19,7 @@ def test_check_order_fields(open_connection):
     create_index()
     lackey.click("cmb_name_table_COUNTRY.png")
     lackey.click("table_name_EMPLOYEE.png")
-    lackey.click("bt_dbl_triangle_left.png")
+    lackey.click("bt_dbl_triangle_right.png")
     lackey.click("column_name_EMP_NO.png")
     for _ in range(5):
         lackey.click("bt_sngl_triangle_down.png")

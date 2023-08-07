@@ -120,5 +120,5 @@ def test_create_role(open_connection):
 
 def test_create_index(open_connection):
     init_create("icon_indices.png")
-    lackey.click("bt_dbl_triangle_left.png")
+    lackey.click("bt_dbl_triangle_right.png")
     click_tab_comment(MinSimilarity=0.93)
