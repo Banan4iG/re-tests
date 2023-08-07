@@ -14,7 +14,9 @@ def test_cron(open_connection):
     lackey.type("59 23 11 2 3")
 
     #once a year checking
+    lackey.SettingsMaster.MinSimilarity = 0.93
     lackey.click("once_a_year_left_line.png")
+    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.type("a",lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE) 
     lackey.type("23:57")
@@ -53,10 +55,11 @@ def test_cron(open_connection):
     for i in range(3):
         lackey.click(lackey.exists("button_up_down.png").getTarget().above(5))
     array_of_buttons_down = list(lackey.findAll("button_down.png"))
-    lackey.click(array_of_buttons_down[4])
+    lackey.click("job_shedule_mouths.png")
     lackey.click("button_march.png")
-    lackey.click("days.png")
-    lackey.click(array_of_buttons_down[5])
+    days = lackey.exists("days.png")
+    lackey.click(days)
+    lackey.click(days.getTarget().right(150))
     lackey.click("every_month_days_chosen.png")
     result4 = lackey.exists("every_month_checking.png")
 
@@ -64,8 +67,7 @@ def test_cron(open_connection):
     lackey.click("to_repeat_job_every.png")
     for i in range(2):
         lackey.click(lackey.exists("button_up_down.png").getTarget().below(5))
-    array_of_buttons_down = list(lackey.findAll("button_down.png"))
-    lackey.click(array_of_buttons_down[6])
+    lackey.click("to_repeat_job_every_5min.png")
     lackey.click("to_repeat_job_every_chosen.png")
     result5 = lackey.exists("to_repeat_job_every_checking.png")
 
