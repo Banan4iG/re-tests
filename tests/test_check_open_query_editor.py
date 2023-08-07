@@ -1,7 +1,7 @@
 import lackey
 import os
 from re_tests_plugin import *
-
+from pathlib import Path
 
 def test_empty_saved():
     lackey.doubleClick("icon_conn.png")
@@ -19,7 +19,8 @@ def test_empty_saved():
 
 def test_empty():
     home_dir = os.path.expanduser("~")
-    os.remove(os.path.join(home_dir,'.redexpert/202301/QueryEditor/script1.sql'))
+    for path in Path(os.path.join(home_dir,'.redexpert/202301/QueryEditor')).glob("script*.sql"):
+        os.remove(path)
     
     lackey.doubleClick("icon_conn.png")
     time.sleep(2)
