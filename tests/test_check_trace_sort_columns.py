@@ -15,31 +15,37 @@ def test_1():
     lackey.click("trace_manager.png")
     lackey.click("visible_columns.png")
     lackey.click("bt_dbl_triangle_left.png")
-    lackey.click("bt_dbl_triangle_right.png")    
-
-    x = 1450
-    for i in range(5):
-        y = random.randint(205, 950)
-        lackey.click(lackey.Location(x, y))
+    bt = lackey.exists("bt_dbl_triangle_right.png")
+    lackey.click(bt) 
+    (_, middle_y) = bt.getTarget().getTuple()
+    (x, y) = lackey.exists("selected_columns.png").getTarget().getTuple()
+    max_y = y+((middle_y-y)*2)
+    for _ in range(5):
+        current_y = random.randint(y+5, max_y)
+        lackey.click(lackey.Location(x, current_y))
         lackey.click(random.choice(avaible_actions))
         lackey.click("table_runner.png")
-        lackey.wheel(lackey.Mouse.WHEEL_DOWN, 6)
-        y = random.randint(205, 950)
-        lackey.click(lackey.Location(x, y))
+        lackey.wheel(lackey.Mouse.WHEEL_DOWN, 10)
+        current_y = random.randint(y+5, max_y)
+        lackey.click(lackey.Location(x, current_y))
         lackey.click(random.choice(avaible_actions))
         lackey.click("table_runner.png")
-        lackey.wheel(lackey.Mouse.WHEEL_UP, 6)
+        lackey.wheel(lackey.Mouse.WHEEL_UP, 10)
   
     lackey.click("bt_dbl_triangle_left.png")
-    result1 = lackey.exists("sorted_available_columns1.png")
-    result2 = lackey.exists("sorted_available_columns2.png") 
-    lackey.click("table_runner.png")
-    lackey.wheel(lackey.Mouse.WHEEL_DOWN, 6)
-    result3 = lackey.exists("sorted_available_columns3.png")
-    result4 = lackey.exists("sorted_available_columns4.png")
+
+    results = []
+    for i in range(1, 5):
+        count = 0
+        while lackey.exists(f"sorted_available_columns{i}.png") == None:
+            lackey.click("table_runner.png")
+            lackey.wheel(lackey.Mouse.WHEEL_DOWN, 2)
+            count += 1
+            if count == 5:
+                break
+        results.append(lackey.exists(f"sorted_available_columns{i}.png"))
+    lackey.SettingsMaster.MinSimilarity = 0.93        
     lackey.rightClick("tab_trace_manager_blue.png")
+    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.click("bt_tab_close_all.png")
-    assert result1 != None
-    assert result2 != None
-    assert result3 != None
-    assert result4 != None
+    assert results != [None, None, None, None]

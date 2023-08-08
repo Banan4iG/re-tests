@@ -7,12 +7,12 @@ def test_check_show_password(open_connection):
     lackey.click("tree_create_menu.png")
     lackey.click("text_input_password.png")
     lackey.type("123")
-    result1 = lackey.exists("text_input_password_invisible.png")
+    result1 = lackey.exists("text_input_password_visible.png")
     lackey.click("chb_show_pass.png")
     result2 = lackey.exists("text_input_password_visible.png")
     lackey.click("bt_cancel.png")
     lackey.click("bt_yes.png")
-    assert result1 != None
+    assert result1 == None
     assert result2 != None
 
 def test_check_paste_from_clipboard(open_connection):
