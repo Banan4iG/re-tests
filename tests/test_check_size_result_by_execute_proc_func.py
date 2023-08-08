@@ -13,7 +13,7 @@ def test_check_proc(open_connection):
     result1 = lackey.exists("result_set_proc_ALL_LANGS.png")
     lackey.click("tab_output.png")
     result2 =  lackey.exists("output_proc_ALL_LANGS.png")
-    lackey.click("close.png")
+    lackey.type(lackey.Key.ESC)
     lackey.click("bt_cancel.png")
     assert result1 != None
     assert result2 != None
@@ -43,7 +43,7 @@ end
     result1 = lackey.exists("result_set_func_NEW_FUNC.png")
     lackey.click("tab_output.png")
     result2 =  lackey.exists("output_func_NEW_FUNC.png")
-    lackey.click("close.png")
+    lackey.type(lackey.Key.ESC)
     lackey.click("bt_cancel.png")
     with fdb.connect(database='localhost:employee.fdb', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
         con.execute_immediate("DROP FUNCTION NEW_FUNC")
