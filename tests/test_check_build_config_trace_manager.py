@@ -110,7 +110,7 @@ def test_1(open_connection):
         assert check_dict[first][0] == second
         f.readline()
     f.close()
-    lackey.rightClick("tab_trace_manager_blue.png")
+    lackey.rightClick("tab_trace_manager.png")
     lackey.click("bt_tab_close_all.png")
 
 
@@ -172,7 +172,7 @@ def test_2(open_connection):
         assert check_dict[first][1] == second
         f.readline()
     f.close()
-    lackey.rightClick("tab_trace_manager_blue.png")
+    lackey.rightClick("tab_trace_manager.png")
     lackey.click("bt_tab_close_all.png")
 
 if os.path.exists(conf_path): os.remove(conf_path)

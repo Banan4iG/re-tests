@@ -8,7 +8,7 @@ def test_settings(open_connection):
     lackey.click(lackey.exists("Name.png").getTarget().right(100))
     lackey.type("a",lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE) 
-    lackey.type("New_job_0")
+    lackey.type("Newjob0")
 
     #start and end checking
     array_of_buttons_more = list(lackey.findAll("button_more.png"))

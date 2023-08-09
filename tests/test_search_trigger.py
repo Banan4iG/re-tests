@@ -4,7 +4,7 @@ from re_tests_plugin import *
 
 
 def test_search_trigger(open_connection):
-    trigger = "alter trigger fts$trig_22 sql security definer"
+    trigger = "alter trigger fts$trig22 sql security definer"
     lackey.click("tab_query_editor.png")
     lackey.click("tab_query_editor_text.png")
     lackey.type(trigger)
