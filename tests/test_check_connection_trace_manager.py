@@ -73,6 +73,7 @@ def test_1(open_connection):
     array_of_stops = list(lackey.findAll("stop.png"))
     lackey.click(array_of_stops[0])
     lackey.click(array_of_stops[1])
+    lackey.click("tab_trace_manager_grid_view.png")
     lackey.click("clear_table.png")
     result1 = lackey.exists("clear_table_result.png")
     lackey.rightClick("tab_trace_manager_blue.png")
