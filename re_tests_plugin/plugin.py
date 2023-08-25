@@ -2,12 +2,15 @@ import pytest
 import lackey
 import time
 import platform
+from firebird.driver import driver_config
+
+driver_config.server_defaults.host.value = 'localhost'
+driver_config.server_defaults.user.value = 'SYSDBA'
+driver_config.server_defaults.password.value = 'masterkey'
+
 
 def plus_find(name_of_the_group):
     return lackey.exists(name_of_the_group).getTarget().left(25)
-
-ADMIN_NAME = 'sysdba'
-ADMIN_PASSWORD = 'masterkey'
 
 @pytest.fixture
 def open_connection(request):
@@ -30,7 +33,7 @@ def open_connection(request):
     lackey.doubleClick("icon_conn_open.png")
 
 @pytest.fixture(scope='session', autouse=True)
-def create_connection():
+def init_test_session():
     lackey.App.focus("Red Expert")
     
     image_path = ["files/images/"]

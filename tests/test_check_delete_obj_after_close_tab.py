@@ -12,7 +12,7 @@ begin
 end
 """
 
-    with fdb.connect(database='localhost:employee.fdb', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
+    with fdb.connect('employee') as con:
         con.execute_immediate(script)
         con.commit()
     

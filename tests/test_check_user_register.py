@@ -12,7 +12,7 @@ def check_user(number):
     return result
 
 def test_1(open_connection):
-    with fdb.connect(database='localhost:employee', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
+    with fdb.connect('employee') as con:
         cur = con.cursor()
         cur.execute('CREATE USER "DEMO" PASSWORD \'pass\'')
         cur.execute('CREATE USER "dEmO" PASSWORD \'pass\'')
@@ -27,7 +27,7 @@ def test_1(open_connection):
     result1 = check_user(1)
     result2 = check_user(2)
 
-    with fdb.connect(database='localhost:employee', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
+    with fdb.connect('employee') as con:
         cur = con.cursor()
         cur.execute('DROP USER "DEMO"')
         cur.execute('DROP USER "dEmO"')

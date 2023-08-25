@@ -28,7 +28,7 @@ begin
 end
 """
 
-    with fdb.connect(database='localhost:employee.fdb', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
+    with fdb.connect('employee') as con:
         con.execute_immediate(script)
         con.commit()
     
@@ -45,7 +45,7 @@ end
     result2 =  lackey.exists("output_func_NEW_FUNC.png")
     lackey.type(lackey.Key.ESC)
     lackey.click("bt_cancel.png")
-    with fdb.connect(database='localhost:employee.fdb', user=ADMIN_NAME, password=ADMIN_PASSWORD) as con:
+    with fdb.connect('employee.fdb') as con:
         con.execute_immediate("DROP FUNCTION NEW_FUNC")
         con.commit()
     assert result1 != None
