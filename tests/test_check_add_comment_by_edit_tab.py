@@ -53,13 +53,13 @@ def test_alter_table(open_connection):
 
 def test_alter_gtt(open_connection):
     with fdb.connect('employee') as con:
-        con.execute_immediate('CREATE GLOBAL TEMPORARY TABLE "NEW_GLOBAL TEMPORARY_1" (TESTS BIGINT) ON COMMIT DELETE ROWS')
+        con.execute_immediate('CREATE GLOBAL TEMPORARY TABLE NEW_GTT (TESTS BIGINT) ON COMMIT DELETE ROWS')
         con.commit()
     init_alter("icon_gtt.png", reload=True)
-    lackey.doubleClick("tree_gtt_name_NGT1.png")
+    lackey.doubleClick("tree_gtt_name_NGTT.png")
     result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93)
     with fdb.connect('employee') as con:
-        con.execute_immediate('DROP TABLE "NEW_GLOBAL TEMPORARY_1"')
+        con.execute_immediate('DROP TABLE NEW_GTT')
         con.commit()
     assert result == 'test comment'
 
