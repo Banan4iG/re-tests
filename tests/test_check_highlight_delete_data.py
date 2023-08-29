@@ -2,7 +2,7 @@ import lackey
 from re_tests_plugin import *
 import time
 
-def test_check_PID(open_connection):
+def test_1(open_connection):
     lackey.click("tree_plus.png")
     name_of_the_group = "icon_tables.png"
     lackey.click(plus_find(name_of_the_group))
