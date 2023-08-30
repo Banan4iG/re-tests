@@ -18,8 +18,8 @@ def test_1(open_connection):
     lackey.click(array_of_bars[9])
     lackey.type(conf_path)
     lackey.click("save.png")
-    result1 = lackey.exists("buildconfig_ok.png")
-    lackey.click("buildconfig_ok.png")
+    result1 = lackey.exists("bt_OK_blue.png")
+    lackey.click("bt_OK_blue.png")
 
     #create connection
     lackey.click("connection.png")

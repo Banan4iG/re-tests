@@ -94,7 +94,7 @@ def test_1(open_connection, tmpdir):
     lackey.click(array_of_bars[5])
     lackey.type(conf_path)
     lackey.click("save.png")
-    lackey.click("buildconfig_ok.png")
+    lackey.click("bt_OK_blue.png")
 
     #file check
     array_filling()
@@ -158,7 +158,7 @@ def test_2(open_connection, tmpdir):
     lackey.click(array_of_bars[5])
     lackey.type(conf_path)
     lackey.click("save.png")
-    lackey.click("buildconfig_ok.png")
+    lackey.click("bt_OK_blue.png")
 
     #file check
     array_filling()
