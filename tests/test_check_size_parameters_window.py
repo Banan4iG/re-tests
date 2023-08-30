@@ -1,6 +1,6 @@
 import lackey
 from re_tests_plugin import *
-import pyautogui
+import time
 
 
 def test_1(open_connection):
@@ -13,6 +13,7 @@ def test_1(open_connection):
     lackey.type("123456")
     result3 = lackey.exists("ms_input_parameters_with_int.png")
     lackey.click("bt_cancel.png")
+    time.sleep(1)
     lackey.type("a", lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE)
     assert result1 != None
