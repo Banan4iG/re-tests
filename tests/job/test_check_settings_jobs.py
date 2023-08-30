@@ -11,7 +11,7 @@ def test_settings(open_connection):
     lackey.type("Newjob0")
 
     #start and end checking
-    array_of_buttons_more = list(lackey.findAll("bt_calendar.png"))
+    array_of_buttons_more = list(lackey.findAll("button_more.png"))
     lackey.click((array_of_buttons_more[0]).getTarget().left(50))
     lackey.type("July 6, 2024")
     lackey.click((array_of_buttons_more[1]).getTarget().left(50))
