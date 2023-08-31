@@ -1,7 +1,7 @@
 import lackey, os
 from re_tests_plugin import *
 
-
+conf_path = os.environ.get('TEMP') + "/" + "test_conf.conf"
 check_dict = {}
 def array_filling():    
     check_dict["format"] = ["0", "0"]
@@ -49,10 +49,7 @@ def array_filling():
     check_dict["max_arg_length"] = ["0", "2048"]
     check_dict["max_arg_count"] = ["0", "4096"]
 
-def test_1(open_connection, tmpdir):
-    conf_path = str(tmpdir) + "/" + "test_conf.conf"
-    if os.path.exists(conf_path): 
-        os.remove(conf_path)
+def test_1(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
     lackey.click("buildconfigurationfile.png")
@@ -114,13 +111,8 @@ def test_1(open_connection, tmpdir):
     f.close()
     lackey.rightClick("tab_trace_manager.png")
     lackey.click("bt_tab_close_all.png")
-    if os.path.exists(conf_path): 
-        os.remove(conf_path)
 
-def test_2(open_connection, tmpdir):
-    conf_path = str(tmpdir) + "/" + "test_conf.conf"
-    if os.path.exists(conf_path): 
-        os.remove(conf_path)
+def test_2(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
     lackey.click("buildconfigurationfile.png")
@@ -178,5 +170,6 @@ def test_2(open_connection, tmpdir):
     f.close()
     lackey.rightClick("tab_trace_manager.png")
     lackey.click("bt_tab_close_all.png")
-    if os.path.exists(conf_path): 
-        os.remove(conf_path)
+
+if os.path.exists(conf_path): 
+    os.remove(conf_path)
