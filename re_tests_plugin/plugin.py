@@ -30,6 +30,10 @@ def open_connection(request):
             bt_yes = lackey.exists("bt_YES.png")
             if bt_yes != None:
                 lackey.click(bt_yes)
+        bt_close = lackey.exists("bt_close.png")
+        if bt_close != None:
+            lackey.click(bt_close)
+        
     lackey.doubleClick("icon_conn_open.png")
 
 @pytest.fixture(scope='session', autouse=True)
