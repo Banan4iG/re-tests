@@ -22,7 +22,7 @@ def test_cron(open_connection):
     lackey.type("23:57")
     lackey.click("once_a_year_right_line.png")
     lackey.type("July 7, 2025")
-    array_of_buttons_more = list(lackey.findAll("button_more.png"))
+    array_of_buttons_more = list(lackey.findAll("bt_calendar.png"))
     lackey.click(array_of_buttons_more[2])
     lackey.click("button_a_lot_right.png")
     lackey.click("button_left.png")
