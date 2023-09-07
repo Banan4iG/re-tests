@@ -9,13 +9,17 @@ def init_alter(icon, reload=False):
         lackey.click("tree_reload_menu.png")
     lackey.click(plus_find(icon))
 
-def click_tab_comment(object, MinSimilarity=0.97, object_name=None):
-    if MinSimilarity != 0.97:
-        lackey.SettingsMaster.MinSimilarity = MinSimilarity
-        lackey.click("tab_comment.png")
-        lackey.SettingsMaster.MinSimilarity = 0.97
+def click_tab_comment(object, MinSimilarity=0.97, object_name=None, table=False):
+    if table:
+        lackey.click("tab_properties.png")
+        lackey.click("text_comment.png")
     else:
-        lackey.click("tab_comment.png")
+        if MinSimilarity != 0.97:
+            lackey.SettingsMaster.MinSimilarity = MinSimilarity
+            lackey.click("tab_comment.png")
+            lackey.SettingsMaster.MinSimilarity = 0.97
+        else:
+            lackey.click("tab_comment.png")
     mouse = lackey.Mouse()
     lackey.click(mouse.getPos().below(100))
     lackey.type("test comment")
@@ -48,7 +52,7 @@ def test_alter_domain(open_connection):
 def test_alter_table(open_connection):
     init_alter("icon_tables.png")
     lackey.doubleClick("tree_table_name_EMPLOYEE.png")
-    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93)
+    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93, table=True)
     assert result == 'test comment'
 
 def test_alter_gtt(open_connection):
@@ -57,7 +61,7 @@ def test_alter_gtt(open_connection):
         con.commit()
     init_alter("icon_gtt.png", reload=True)
     lackey.doubleClick("tree_gtt_name_NGTT.png")
-    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93)
+    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93, table=True)
     with fdb.connect('employee') as con:
         con.execute_immediate('DROP TABLE NEW_GTT')
         con.commit()
