@@ -1,7 +1,7 @@
 import lackey
 from re_tests_plugin import *
 
-def test_1():
+def test_1(open_connection):
     lackey.click("str_menu_database.png")
     lackey.click("str_menu_generate_erd.png")
     lackey.click("str_menu_create_new_erd.png")
