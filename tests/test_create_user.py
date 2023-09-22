@@ -22,7 +22,6 @@ def test_check_paste_from_clipboard(open_connection):
     lackey.App.setClipboard("123")
     lackey.click("chb_show_pass.png")
     lackey.click("text_input_password.png")
-    print(lackey.App.getClipboard)
     lackey.type("v", lackey.Key.CTRL)
     result = lackey.exists("text_input_password_visible.png")
     lackey.click("bt_cancel.png")
