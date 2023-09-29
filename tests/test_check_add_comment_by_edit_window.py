@@ -175,12 +175,11 @@ def test_alter_user(open_connection):
     assert result2 != None
 
 def test_alter_index(open_connection):
-    pass
-    # icon_con = lackey.exists("icon_conn.png")
-    # init_alter("icon_indices.png", "index_BUDGETX.png")
-    # result1, result2 = click_tab_comment()
-    # mouse = lackey.Mouse()
-    # mouse.move(icon_con)
-    # lackey.wheel(lackey.Mouse.WHEEL_UP, 10)
-    # assert result1 == 2
-    # assert result2 != None
+    icon_conn_open = lackey.exists("icon_conn_open.png")
+    init_alter("icon_indices.png", "index_BUDGETX.png")
+    result1, result2 = click_tab_comment()
+    mouse = lackey.Mouse()
+    mouse.move(icon_conn_open.getTarget())
+    lackey.wheel(lackey.Mouse.WHEEL_UP, 10)
+    assert result1 == 1
+    assert result2 != None
