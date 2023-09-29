@@ -51,19 +51,16 @@ def test_create_gtt(open_connection):
 
 def test_create_view(open_connection):
     init_create("icon_views.png")
-    tab_ddl = lackey.exists("tab_DDL.png")
-    lackey.click(tab_ddl)
-    lackey.click(tab_ddl.getTarget().below(50))
+    lackey.SettingsMaster.MinSimilarity = 0.96
+    lackey.click(lackey.exists("tab_DDL.png").getTarget().below(50))
+    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.type("a", lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE)
-    script = """CREATE OR ALTER VIEW NEW_VIEW_1 
-AS 
-SELECT country FROM country;
-    """
+    script = "SELECT emp_no FROM employee"
     lackey.App.setClipboard(script)
     lackey.type("v", lackey.Key.CTRL)
     time.sleep(3)
-    click_tab_comment(MinSimilarity=0.93)
+    click_tab_comment()
 
 def test_create_procedure(open_connection):
     init_create("icon_procedures.png")
