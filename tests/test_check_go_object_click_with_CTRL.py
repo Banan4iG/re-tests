@@ -15,9 +15,9 @@ def test_check_in_create_window(open_connection):
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_views.png")
     lackey.click("tree_create_menu.png")
-    lackey.SettingsMaster.MinSimilarity = 0.96
-    lackey.click(lackey.exists("tab_SQL.png").getTarget().offset(50, 100))
-    lackey.SettingsMaster.MinSimilarity = 0.97
+    tab_ddl = lackey.exists("tab_DDL.png")
+    lackey.click(tab_ddl)
+    lackey.click(tab_ddl.getTarget().below(50))
     lackey.type("a", lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE)
     script = """CREATE OR ALTER VIEW NEW_VIEW_1 
