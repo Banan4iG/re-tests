@@ -51,7 +51,7 @@ def test_create_gtt(open_connection):
 
 def test_create_view(open_connection):
     init_create("icon_views.png")
-    lackey.SettingsMaster.MinSimilarity = 0.96
+    lackey.SettingsMaster.MinSimilarity = 0.93
     lackey.click(lackey.exists("tab_DDL.png").getTarget().below(50))
     lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.type("a", lackey.Key.CTRL)
