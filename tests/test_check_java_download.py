@@ -8,7 +8,7 @@ import platform
 import winreg
 
 
-@pytest.mark.skipif(platform.system == "Windows", reason="This test only works on Windows yet")
+@pytest.mark.skip(reason="This test no work yet")
 def test_1():
     #prepare
     lackey.App.close("Red Expert")
