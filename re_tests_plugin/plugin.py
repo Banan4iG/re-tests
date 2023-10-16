@@ -3,11 +3,29 @@ import lackey
 import time
 import platform
 from firebird.driver import driver_config
+from firebird.driver import connect_server
+from firebird.driver import SrvInfoCode
+
 
 driver_config.server_defaults.host.value = 'localhost'
 driver_config.server_defaults.user.value = 'SYSDBA'
 driver_config.server_defaults.password.value = 'masterkey'
 
+
+with connect_server(server='localhost') as srv:
+    for ver in ["3.0", "5.0"]:
+        index = srv.info.version.find(ver)
+        if index > -1:
+            version = ver
+            break
+    
+    for srv_ver in ["Firebird", "RedDatabase"]:
+        index = srv.info.get_info(SrvInfoCode.SERVER_VERSION).find(srv_ver)
+        if index > -1:
+            srv_version = srv_ver
+            break
+
+    print(version, srv_version)
 
 def plus_find(name_of_the_group):
     return lackey.exists(name_of_the_group).getTarget().left(25)
