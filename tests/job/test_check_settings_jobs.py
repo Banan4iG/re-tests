@@ -1,6 +1,8 @@
 import lackey
 from re_tests_plugin import *
 
+
+@pytest.mark.skipif((not (version == "5.0" and srv_version == "RedDatabase")), reason="Not supported")
 def test_settings(open_connection):
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_jobs.png")

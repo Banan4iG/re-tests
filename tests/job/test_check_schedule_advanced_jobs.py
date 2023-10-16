@@ -30,6 +30,7 @@ def every_checking(time):
     check_dict[time][2] = lackey.exists(time + "_every_tick_between_checking.png")
 
 
+@pytest.mark.skipif((not (version == "5.0" and srv_version == "RedDatabase")), reason="Not supported")
 def test_cron_false(open_connection):
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_jobs.png")
@@ -71,7 +72,7 @@ def test_cron_false(open_connection):
     assert result6 != None
     assert result7 >= 1
 
-
+@pytest.mark.skipif((not (version == "5.0" and srv_version == "RedDatabase")), reason="Not supported")
 def test_cron_true(open_connection):
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_jobs.png")
