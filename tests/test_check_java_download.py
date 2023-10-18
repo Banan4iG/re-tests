@@ -4,11 +4,10 @@ import time
 import os
 from pathlib import Path
 import shutil
-import platform
 import winreg
+import subprocess
 
 
-@pytest.mark.skip(reason="This test no work yet")
 def test_1():
     #prepare
     lackey.App.close("Red Expert")
@@ -58,7 +57,8 @@ def test_1():
             new_java = java.replace("Java", "Java_b")
             os.rename(java, new_java)
 
-    lackey.App.open(path_to_exe)
+    # lackey.App.open(path_to_exe)
+    subprocess.Popen(['powershell', f"start-process '{path_to_exe}'"])
     time.sleep(7)
     
     #test
@@ -80,9 +80,11 @@ def test_1():
         old_java = java.replace("Java", "Java_b")
         if os.path.isdir(old_java):
             os.rename(old_java, java)
+    
+    if JAVA_HOME:
+        os.environ['JAVA_HOME'] = JAVA_HOME
 
-    os.environ['JAVA_HOME'] = JAVA_HOME
-
-    lackey.App.open(path_to_exe)
+    # lackey.App.open(path_to_exe)
+    subprocess.Popen(['powershell', f"start-process '{path_to_exe}'"])
     time.sleep(3)
     assert result != None
