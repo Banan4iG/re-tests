@@ -1,5 +1,6 @@
 import lackey
 from re_tests_plugin import *
+import time
 
 def check(use_cancel=True, use_yes=True):
     lackey.click("text_employee_highlight.png", lackey.Key.CTRL)
@@ -50,4 +51,5 @@ def test_check_in_tab(open_connection):
     mouse = lackey.Mouse()
     mouse.move(plus)
     lackey.wheel(lackey.Mouse.WHEEL_UP, 10)
+    time.sleep(0.5)
     assert result != None
