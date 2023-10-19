@@ -53,3 +53,20 @@ def test_check_in_tab(open_connection):
     lackey.wheel(lackey.Mouse.WHEEL_UP, 10)
     time.sleep(0.5)
     assert result != None
+
+def test_check_in_query_editor(open_connection):
+    lackey.click("tab_query_editor.png")
+    lackey.click("tab_query_editor_text.png")
+    script = "SELECT emp_no FROM employee"
+    lackey.App.setClipboard(script)
+    lackey.type("v", lackey.Key.CTRL)
+    lackey.click("text_employee_highlight.png", lackey.Key.CTRL)
+    result = lackey.exists("tab_table_EMPLOYEE_blue.png")
+    lackey.SettingsMaster.MinSimilarity = 0.95
+    lackey.click("tab_query_editor.png")
+    lackey.SettingsMaster.MinSimilarity = 0.97
+    lackey.type("a", lackey.Key.CTRL)
+    lackey.type(lackey.Key.BACKSPACE)
+    lackey.rightClick("tab_query_editor_blue.png")
+    lackey.click("bt_tab_close_all.png")
+    assert result != None
