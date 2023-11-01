@@ -33,11 +33,15 @@ def click_tab_column():
     lackey.click("bt_OK.png")
     result1 = len(list(lackey.findAll("text_success.png")))
     result2 = lackey.exists("text_test_comment.png")
+    result3 = lackey.exists("operation_ADD_COMMENT.png")
+    result4 = lackey.exists("text_comment_added.png")
     lackey.click("bt_rollback.png")
     lackey.click("bt_cancel.png")
     lackey.click("bt_YES.png")
     assert result1 == 2
     assert result2 != None
+    assert result3 != None
+    assert result4 != None
 
 def click_tab_comment(MinSimilarity=0.97):
     if MinSimilarity != 0.97:
@@ -52,11 +56,15 @@ def click_tab_comment(MinSimilarity=0.97):
     lackey.click("bt_OK.png")
     result1 = len(list(lackey.findAll("text_success.png")))
     result2 = lackey.exists("text_test_comment.png")
+    result3 = lackey.exists("operation_ADD_COMMENT.png")
+    result4 = lackey.exists("text_comment_added.png")
     lackey.click("bt_rollback.png")
     lackey.click("bt_cancel.png")
     lackey.click("bt_YES.png")
     assert result1 >= 2
     assert result2 != None
+    assert result3 != None
+    assert result4 != None
 
 def test_create_domain(open_connection):
     init_create("icon_domains.png")
