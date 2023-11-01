@@ -2,6 +2,8 @@ import pytest
 import lackey
 import time
 import platform
+import os
+import subprocess
 from firebird.driver import driver_config
 from firebird.driver import connect_server
 from firebird.driver import SrvInfoCode
@@ -56,6 +58,21 @@ def open_connection(request):
 
 @pytest.fixture(scope='session', autouse=True)
 def init_test_session():
+    if lackey.App("Red Expert").getPID() == -1:
+        DIST = os.environ.get('DIST')
+        ARCH = os.environ.get('ARCH')
+        if DIST:
+            path_to_exe = DIST + "\\bin"
+            if ARCH == "x86_64":
+                path_to_exe += "\\RedExpert64.exe" 
+            else:
+                path_to_exe += "\\RedExpert.exe"
+        else:
+            path_to_exe = '"C:\\Program Files\\RedExpert\\bin\\RedExpert64.exe"'
+        
+        lackey.App(path_to_exe).open()
+        time.sleep(5)
+    
     lackey.App.focus("Red Expert")
     
     image_path = ["files/images/"]
