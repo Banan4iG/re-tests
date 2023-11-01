@@ -86,3 +86,5 @@ def init_test_session():
     lackey.SettingsMaster.ImagePaths = image_path
     lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.SettingsMaster.MoveMouseDelay = 0.1
+    yield
+    lackey.App.close("Red Expert")
