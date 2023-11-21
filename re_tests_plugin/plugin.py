@@ -58,7 +58,8 @@ def open_connection(request):
 
 @pytest.fixture(scope='session', autouse=True)
 def init_test_session():
-    if lackey.App("Red Expert").getPID() == -1:
+    pid = lackey.App("Red Expert").getPID()
+    if pid == -1:
         DIST = os.environ.get('DIST')
         ARCH = os.environ.get('ARCH')
         if DIST:
@@ -87,4 +88,5 @@ def init_test_session():
     lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.SettingsMaster.MoveMouseDelay = 0.1
     yield
-    lackey.App.close("Red Expert")
+    if pid == -1:
+        lackey.App.close("Red Expert")
