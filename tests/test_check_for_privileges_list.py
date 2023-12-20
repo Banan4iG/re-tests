@@ -24,8 +24,6 @@ def test_check_for_privileges_list(open_connection):
     lackey.click("text_Functions.png")
     lackey.click("text_Functions.png")
     lackey.click("text_Packages.png")
-    lackey.click("text_Packages.png")
-    lackey.click("text_Users.png")
     lackey.click("icon_cross.png")
     assert result1 != None
     assert result2 != None

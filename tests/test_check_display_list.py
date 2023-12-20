@@ -4,6 +4,8 @@ from re_tests_plugin import *
 def test_check_display_list(open_connection):
     lackey.click("tools.png")
     lackey.click("tab_grant_manager.png")
+    lackey.click("text_Users.png")
+    lackey.click("text_Roles.png")
     lackey.click("text_PUBLIC.png")
     lackey.click("text_Display_All.png")
     result1 = lackey.exists("text_display_list_visible.png")
