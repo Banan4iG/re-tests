@@ -1,29 +1,16 @@
 import lackey
 from re_tests_plugin import *
+import firebird.driver as fdb
+
 
 def test_check_constraints_spacebar(open_connection):
+    with fdb.connect("employee") as con:
+        con.execute_immediate("CREATE TABLE NEW_TABLE_1(\"TEST COMMENT\" int);")
+        con.commit()
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_tables.png")
-    lackey.click("tree_create_menu.png")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("{TAB}")
-    lackey.type("test comment")
-    lackey.type("{TAB}")
-    lackey.type("b")
-    time.sleep(1)
-    lackey.type("b")
-    lackey.click("bt_OK.png")
-    lackey.click("bt_commit.png")
-    lackey.click("tree_plus_tables.png")
+    lackey.click("tree_reload_menu.png")
+    lackey.click(plus_find("icon_tables.png"))
     lackey.doubleClick("text_NEW_TABLE_1.png")
     lackey.click("tab_constraints.png")
     lackey.click("bt_insert_constraint.png")
@@ -31,12 +18,12 @@ def test_check_constraints_spacebar(open_connection):
     lackey.click("text_UNIQUE.png")
     lackey.doubleClick("text_TEST_COMMENT_CAPS.png")
     lackey.click("bt_OK.png")
-    result1 = lackey.exists("text_constraints_visible.png")
+    result1 = lackey.exists("text_success.png")
     lackey.click("bt_commit.png")
     result2 = lackey.exists("text_UQ_NEW_TABLE_1_1.png")
     lackey.click("icon_cross.png")
-    lackey.rightClick("text_NEW_TABLE_1_blue.png")
-    lackey.click("text_Delete_NEW_TABLE_1.png")
-    lackey.click("bt_commit.png")
+    with fdb.connect("employee") as con:
+        con.execute_immediate("DROP TABLE NEW_TABLE_1;")
+        con.commit()
     assert result1 != None
     assert result2 != None
