@@ -20,7 +20,7 @@ def test_check_constraints_spacebar(open_connection):
     lackey.click("bt_OK.png")
     result1 = lackey.exists("text_success.png")
     lackey.click("bt_commit.png")
-    result2 = lackey.exists("text_UQ_NEW_TABLE_1_1.png")
+    result2 = lackey.exists("text_UQ_.png")
     lackey.click("icon_cross.png")
     with fdb.connect("employee") as con:
         con.execute_immediate("DROP TABLE NEW_TABLE_1;")

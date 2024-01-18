@@ -86,7 +86,9 @@ def test_1(open_connection):
 def test_2(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
-    lackey.click(lackey.exists("open_filelog.png").getTarget().right(60))
+    list_b = list(lackey.findAll("bt_more.png"))
+    b = min(list_b, key=lambda i: i.getTarget().getY())
+    lackey.click(b.getTarget())
     lackey.click("file_name.png")
     lackey.type(log_path)
     lackey.click("open.png")
