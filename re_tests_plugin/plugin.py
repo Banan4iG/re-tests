@@ -54,10 +54,11 @@ def open_connection(request):
         if bt_close != None:
             lackey.click(bt_close)
         
-        if lackey.exists("error_message_no_conn.png") != None:
-            lackey.click("bt_OK_blue.png")
-
     lackey.doubleClick("icon_conn_open.png")
+    if tests_failed_after > tests_failed_before:
+        bt_ok = lackey.exists("bt_OK_blue.png")
+        if bt_ok != None:
+            lackey.click(bt_ok)
 
 @pytest.fixture(scope='session', autouse=True)
 def init_test_session():

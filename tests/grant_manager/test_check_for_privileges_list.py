@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_for_privileges_list():
+def test_check_for_privileges_list(open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("""
 CREATE OR ALTER FUNCTION NEW_FUNC
@@ -16,7 +16,8 @@ end
         con.execute_immediate("CREATE PACKAGE NEW_PACK AS BEGIN END;")
         con.execute_immediate("RECREATE PACKAGE BODY NEW_PACK AS BEGIN END;")
         con.commit()
-    lackey.doubleClick("icon_conn.png")
+    lackey.rightClick("icon_conn_open.png")
+    lackey.click("tree_reload_menu.png")
     lackey.click("tools.png")
     lackey.click("tab_grant_manager.png")
     result1 = lackey.exists("text_SYSDBA_blue.png")
@@ -43,7 +44,6 @@ end
         con.execute_immediate("DROP FUNCTION NEW_FUNC;")
         con.execute_immediate("DROP PACKAGE NEW_PACK;")
         con.commit()
-    lackey.doubleClick("icon_conn_open.png")
     assert result1 != None
     assert result2 != None
     assert result3 != None
