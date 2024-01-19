@@ -6,7 +6,11 @@ import time
 def check_membership():
         with fdb.connect("employee") as con:
             cur = con.cursor()
-            cur.execute("select rdb$user, rdb$privilege, rdb$grant_option, rdb$relation_name from RDB$USER_PRIVILEGES where rdb$user='TEST_USER';")
+            cur.execute("""select CAST(rdb$user as VARCHAR(10)), 
+                        CAST(rdb$privilege as VARCHAR(1)), 
+                        rdb$grant_option, 
+                        CAST(rdb$relation_name as VARCHAR(10))
+                        from RDB$USER_PRIVILEGES where rdb$relation_name='ATEST_ROLE';""")
             result = cur.fetchone()
             cur.close()
         return result
@@ -43,8 +47,8 @@ def action(type):
         con.execute_immediate(f"DROP {type} TEST_USER;")
         con.execute_immediate("DROP ROLE ATEST_ROLE;")
         con.commit()
-    assert result1 == ('TEST_USER                                                      ', 'M     ', 0, 'ATEST_ROLE                                                     ')
-    assert result2 == ('TEST_USER                                                      ', 'M     ', 2, 'ATEST_ROLE                                                     ')
+    assert result1 == ('TEST_USER ', 'M', 0, 'ATEST_ROLE')
+    assert result2 == ('TEST_USER ', 'M', 2, 'ATEST_ROLE')
     assert result3 == None
 
 def test_check_membership_role_to_user(open_connection):

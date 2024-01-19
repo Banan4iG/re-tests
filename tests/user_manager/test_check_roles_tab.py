@@ -14,7 +14,7 @@ def test_check_roles_tab(open_connection):
     result1 = lackey.exists("text_TEST_ROLE.png")
     with fdb.connect("employee") as con:
         cur = con.cursor()
-        cur.execute("select rdb$role_name from rdb$roles where rdb$role_name='TEST_ROLE';")
+        cur.execute("select CAST(rdb$role_name as VARCHAR(10)) from rdb$roles where rdb$role_name='TEST_ROLE';")
         result2 = cur.fetchone()
         cur.close()
     lackey.click("text_TEST_ROLE.png")
@@ -23,4 +23,4 @@ def test_check_roles_tab(open_connection):
     lackey.rightClick("tab_user_manager_blue.png")
     lackey.click("bt_tab_close.png")
     assert result1 != None
-    assert result2 == ('TEST_ROLE                                                      ',)
+    assert result2 == ('TEST_ROLE ',)
