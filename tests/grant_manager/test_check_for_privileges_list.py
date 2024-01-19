@@ -23,7 +23,10 @@ end
     result1 = lackey.exists("text_SYSDBA_blue.png")
     lackey.click("text_Users.png")
     lackey.click("text_Roles.png")
-    result2 = lackey.exists("list_roles_gm.png")
+    if srv_version == "Firebird":
+        result2 = lackey.exists("list_roles_gm_fb.png")
+    else:
+        result2 = lackey.exists("list_roles_gm.png")
     lackey.click("text_Roles.png")
     lackey.click("text_Views.png")
     result3 = lackey.exists("text_PHONE_LIST_blue.png")

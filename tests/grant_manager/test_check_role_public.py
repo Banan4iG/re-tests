@@ -13,7 +13,7 @@ begin
   RETURN 'five';
 end
 """)
-        con.execute_immediate("CREATE PACKAGE NEW_PACK AS BEGIN END;")
+        con.execute_immediate("CREATE OR ALTER PACKAGE NEW_PACK AS BEGIN END;")
         con.execute_immediate("RECREATE PACKAGE BODY NEW_PACK AS BEGIN END;")
         con.commit()
     lackey.rightClick("icon_conn_open.png")

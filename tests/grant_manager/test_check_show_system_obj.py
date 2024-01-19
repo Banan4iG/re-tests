@@ -12,5 +12,8 @@ def test_check_checkbox(open_connection):
     result3 = len(list(lackey.findAll("icon_system_sequences.png")))
     lackey.click("icon_cross.png")
     assert result1 > 0
-    assert result2 > 0
+    if version == "3.0":
+        assert result2 == 0
+    else:
+        assert result2 > 0
     assert result3 > 0
