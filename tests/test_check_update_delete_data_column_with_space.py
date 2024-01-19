@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_data_warning(open_connection):
+def test_data_with_space(open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("CREATE TABLE NEW_TABLE_1(\"TEST COL\" VARCHAR(50));")
         con.commit()
