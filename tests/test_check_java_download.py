@@ -8,7 +8,7 @@ import winreg
 import subprocess
 
 
-@pytest.mark.skip(reason="This test no work yet")
+#@pytest.mark.skip(reason="This test no work yet")
 def test_1():
     #prepare
     lackey.App.close("Red Expert")
