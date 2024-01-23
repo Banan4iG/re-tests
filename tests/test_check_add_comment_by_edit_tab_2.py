@@ -10,15 +10,10 @@ def init_alter(icon, name, reload=False):
     lackey.click(plus_find(icon))
     lackey.doubleClick(name)
 
-def click_tab_comment(MinSimilarity=0.97):
-    if MinSimilarity != 0.97:
-        lackey.SettingsMaster.MinSimilarity = MinSimilarity
-        lackey.click("tab_comment.png")
-        lackey.SettingsMaster.MinSimilarity = 0.97
-    else:
-        lackey.click("tab_comment.png")
+def click_tab_comment():
+    lackey.click("tab_comment.png")
     mouse = lackey.Mouse()
-    lackey.click(mouse.getPos().below(100))
+    lackey.click(mouse.getPos().offset(30, 100))
     lackey.type("test comment")
     lackey.click("bt_OK.png")
     result1 = len(list(lackey.findAll("text_success.png")))
@@ -205,7 +200,7 @@ END
 
 def test_alter_sequence(open_connection):
     init_alter("icon_sequences.png", "sequence_EMP_NO_GEN.png")
-    result1, result2, result3, result4 = click_tab_comment(MinSimilarity=0.93)
+    result1, result2, result3, result4 = click_tab_comment()
     assert result1 == 2
     assert result2 != None
     assert result3 != None
@@ -254,7 +249,7 @@ def test_alter_role(open_connection):
         con.execute_immediate("CREATE ROLE NEW_ROLE")
         con.commit()
     init_alter("icon_roles.png","role_NEW_ROLE.png", reload=True)
-    result1, result2, result3, result4 = click_tab_comment(MinSimilarity=0.93)
+    result1, result2, result3, result4 = click_tab_comment()
     with fdb.connect('employee') as con:
         con.execute_immediate("DROP ROLE NEW_ROLE")
         con.commit()

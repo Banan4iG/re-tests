@@ -31,15 +31,10 @@ def click_tab_column(param):
     lackey.click("bt_YES.png")
     return result1, result2, result3, result4
 
-def click_tab_comment(MinSimilarity=0.97):
-    if MinSimilarity != 0.97:
-        lackey.SettingsMaster.MinSimilarity = MinSimilarity
-        lackey.click("tab_comment.png")
-        lackey.SettingsMaster.MinSimilarity = 0.97
-    else:
-        lackey.click("tab_comment.png")
+def click_tab_comment():
+    lackey.click("tab_comment.png")
     mouse = lackey.Mouse()
-    lackey.click(mouse.getPos().below(100))
+    lackey.click(mouse.getPos().offset(30, 100))
     lackey.type("test comment")
     lackey.click("bt_OK.png")
     result1 = len(list(lackey.findAll("text_success.png")))
@@ -89,7 +84,7 @@ def test_alter_gtt_column(open_connection):
 
 def test_alter_view(open_connection):
     init_alter("icon_views.png", "tree_view_name_PHONE_LIST.png")
-    result1, result2, result3, result4 = click_tab_comment(MinSimilarity=0.93)
+    result1, result2, result3, result4 = click_tab_comment()
     assert result1 == 2
     assert result2 != None
 
@@ -241,7 +236,7 @@ END
 
 def test_alter_sequence(open_connection):
     init_alter("icon_sequences.png", "sequence_EMP_NO_GEN.png")
-    result1, result2, result3, result4 = click_tab_comment(MinSimilarity=0.93)
+    result1, result2, result3, result4 = click_tab_comment()
     assert result1 == 2
     assert result2 != None
     assert result3 != None

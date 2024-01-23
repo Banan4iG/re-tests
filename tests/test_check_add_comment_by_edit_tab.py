@@ -9,19 +9,14 @@ def init_alter(icon, reload=False):
         lackey.click("tree_reload_menu.png")
     lackey.click(plus_find(icon))
 
-def click_tab_comment(object, MinSimilarity=0.97, object_name=None, table=False):
+def click_tab_comment(object, object_name=None, table=False):
     if table:
         lackey.click("tab_properties.png")
         lackey.click("text_comment.png")
     else:
-        if MinSimilarity != 0.97:
-            lackey.SettingsMaster.MinSimilarity = MinSimilarity
-            lackey.click("tab_comment.png")
-            lackey.SettingsMaster.MinSimilarity = 0.97
-        else:
-            lackey.click("tab_comment.png")
+        lackey.click("tab_comment.png")
     mouse = lackey.Mouse()
-    lackey.click(mouse.getPos().below(100))
+    lackey.click(mouse.getPos().offset(30, 100))
     lackey.type("test comment")
     lackey.click("icon_commit.png")
     with fdb.connect('employee') as con:
@@ -52,7 +47,7 @@ def test_alter_domain(open_connection):
 def test_alter_table(open_connection):
     init_alter("icon_tables.png")
     lackey.doubleClick("tree_table_name_EMPLOYEE.png")
-    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93, table=True)
+    result = click_tab_comment("RDB$RELATIONS", table=True)
     assert result == 'test comment'
 
 def test_alter_gtt(open_connection):
@@ -61,7 +56,7 @@ def test_alter_gtt(open_connection):
         con.commit()
     init_alter("icon_gtt.png", reload=True)
     lackey.doubleClick("tree_gtt_name_NGTT.png")
-    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93, table=True)
+    result = click_tab_comment("RDB$RELATIONS", table=True)
     with fdb.connect('employee') as con:
         con.execute_immediate('DROP TABLE NEW_GTT')
         con.commit()
@@ -70,7 +65,7 @@ def test_alter_gtt(open_connection):
 def test_alter_view(open_connection):
     init_alter("icon_views.png")
     lackey.doubleClick("tree_view_name_PHONE_LIST.png")
-    result = click_tab_comment("RDB$RELATIONS", MinSimilarity=0.93)
+    result = click_tab_comment("RDB$RELATIONS")
     assert result == 'test comment'
 
 def test_alter_procedure(open_connection):
@@ -164,7 +159,7 @@ END
 def test_alter_sequence(open_connection):
     init_alter("icon_sequences.png")
     lackey.doubleClick("sequence_EMP_NO_GEN.png")
-    result = click_tab_comment("RDB$GENERATORS", MinSimilarity=0.93, object_name="EMP_NO_GEN")
+    result = click_tab_comment("RDB$GENERATORS", object_name="EMP_NO_GEN")
     assert result == 'test comment'
 
 def test_alter_exception(open_connection):
@@ -205,7 +200,7 @@ def test_alter_role(open_connection):
         con.commit()
     init_alter("icon_roles.png", reload=True)
     lackey.doubleClick("role_NEW_ROLE.png")
-    result = click_tab_comment("RDB$ROLES", MinSimilarity=0.93)
+    result = click_tab_comment("RDB$ROLES")
     with fdb.connect('employee') as con:
         con.execute_immediate("DROP ROLE NEW_ROLE")
         con.commit()
