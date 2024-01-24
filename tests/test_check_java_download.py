@@ -60,7 +60,7 @@ def test_1():
 
     # lackey.App.open(path_to_exe)
     subprocess.Popen(['powershell', f"start-process '{path_to_exe}'"])
-    time.sleep(7)
+    time.sleep(15)
     
     #test
     lackey.click("rb_download_java_auto.png")
