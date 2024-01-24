@@ -29,7 +29,7 @@ def click_tab_comment(object, object_name=None, table=False):
             cur.execute(f'select RDB$DESCRIPTION from {object} where RDB$DESCRIPTION is not NULL')
         result = cur.fetchall()
         cur.close()
-    lackey.click(mouse.getPos().below(100))
+    lackey.click(mouse.getPos().offset(30, 100))
     lackey.type("a", lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE)
     lackey.click("icon_commit.png")
