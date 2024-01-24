@@ -13,7 +13,7 @@ avaible_actions = (
 def test_1():
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
-    lackey.click("visible_columns.png")
+    lackey.click("icon_visible_columns.png")
     lackey.click("bt_dbl_triangle_left.png")
     bt = lackey.exists("bt_dbl_triangle_right.png")
     lackey.click(bt) 
@@ -35,15 +35,16 @@ def test_1():
     lackey.click("bt_dbl_triangle_left.png")
 
     results = []
-    for i in range(1, 5):
+    for i in range(1, 6):
         count = 0
         while lackey.exists(f"sorted_available_columns{i}.png") == None:
             lackey.click("table_runner.png")
-            lackey.wheel(lackey.Mouse.WHEEL_DOWN, 2)
+            lackey.wheel(lackey.Mouse.WHEEL_DOWN, 1)
             count += 1
             if count == 5:
                 break
         results.append(lackey.exists(f"sorted_available_columns{i}.png"))
+    lackey.type("{ESC}")
     lackey.SettingsMaster.MinSimilarity = 0.93        
     lackey.rightClick("tab_trace_manager_blue.png")
     lackey.SettingsMaster.MinSimilarity = 0.97
