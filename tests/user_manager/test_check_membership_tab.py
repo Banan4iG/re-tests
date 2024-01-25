@@ -28,7 +28,9 @@ def action(type):
     lackey.click("tab_membership.png")
     if type == "ROLE":
         lackey.click("checkbox_empty.png")
-    loc = lackey.exists("text_TEST_USER.png").getTarget().right(200)
+    x = lackey.exists("text_atest_role.png").getTarget().getX()
+    y = lackey.exists("text_TEST_USER.png").getTarget().getY()
+    loc = lackey.Location(x, y)
     lackey.click(loc)
     lackey.click("bt_grant_role.png")
     time.sleep(0.5)
