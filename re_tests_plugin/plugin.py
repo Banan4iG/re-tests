@@ -48,7 +48,7 @@ def open_app():
             path_to_exe = '"C:\\Program Files\\RedExpert\\bin\\RedExpert64.exe"'
         
         subprocess.Popen(['powershell', f"start-process '{path_to_exe}'"])
-        time.sleep(5)
+        time.sleep(7)
     return pid
 
 
