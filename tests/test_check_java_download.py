@@ -51,7 +51,8 @@ def test_1():
                         break
         except:
             continue
-        
+    
+    java_list.append("C:\\Program Files (x86)\\Java")
     list(set(java_list))
     for java in java_list:
         if os.path.isdir(java):
@@ -87,5 +88,5 @@ def test_1():
 
     # lackey.App.open(path_to_exe)
     subprocess.Popen(['powershell', f"start-process '{path_to_exe}'"])
-    time.sleep(3)
+    time.sleep(7)
     assert result != None
