@@ -22,9 +22,9 @@ def test_check_revoke_grant_buttons(open_connection):
     lackey.click(click_top_button("bt_grant_column.png"))
     lackey.click(click_top_button("bt_revoke_row.png"))
     lackey.click(click_top_button("bt_grant_row.png"))
+    lackey.SettingsMaster.MinSimilarity = 0.97
     result2 = lackey.exists("text_grant_visible.png")
     lackey.click("bt_grant_all.png")
-    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.click(click_top_button("bt_grant_option_column.png"))
     lackey.click(click_top_button("bt_grant_option_row.png"))
     result3 = lackey.exists("text_grant_option_visible.png")

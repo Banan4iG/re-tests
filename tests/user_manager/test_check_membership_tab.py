@@ -10,7 +10,7 @@ def check_membership():
                         CAST(rdb$privilege as VARCHAR(1)), 
                         rdb$grant_option, 
                         CAST(rdb$relation_name as VARCHAR(10))
-                        from RDB$USER_PRIVILEGES where rdb$relation_name='ATEST_ROLE';""")
+                        from RDB$USER_PRIVILEGES where rdb$user='TEST_USER';""")
             result = cur.fetchone()
             cur.close()
         return result
@@ -28,6 +28,7 @@ def action(type):
     lackey.click("tab_membership.png")
     if type == "ROLE":
         lackey.click("checkbox_empty.png")
+        time.sleep(0.5)
     x = lackey.exists("text_atest_role.png").getTarget().getX()
     y = lackey.exists("text_TEST_USER.png").getTarget().getY()
     loc = lackey.Location(x, y)

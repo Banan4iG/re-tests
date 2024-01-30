@@ -33,7 +33,7 @@ def test_1(open_connection):
     lackey.type(lackey.Key.BACKSPACE) 
     lackey.type(conf_path + "{ENTER}")
     lackey.click("log_to_file.png")
-    lackey.click(lackey.exists("without_a_tick_log_to_file.png").getTarget().right(300))
+    lackey.type("{TAB}{TAB}")
     lackey.type(log_path)
     lackey.click("start.png")
 
