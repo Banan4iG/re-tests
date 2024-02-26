@@ -8,6 +8,8 @@ def test_check_roles_tab(open_connection):
     lackey.click("tab_user_manager.png")
     lackey.click("tab_roles.png")
     lackey.click("bt_add.png")
+    lackey.type("{TAB}")
+    lackey.type("a", lackey.Key.CTRL)
     lackey.type("test_role")
     lackey.click("bt_OK.png")
     lackey.click("bt_commit.png")
@@ -19,7 +21,7 @@ def test_check_roles_tab(open_connection):
         cur.close()
     lackey.click("text_TEST_ROLE.png")
     lackey.click("tree_delete_menu.png")
-    lackey.click("bt_yes.png")
+    lackey.click("bt_commit.png")
     lackey.rightClick("tab_user_manager_blue.png")
     lackey.click("bt_tab_close.png")
     assert result1 != None
