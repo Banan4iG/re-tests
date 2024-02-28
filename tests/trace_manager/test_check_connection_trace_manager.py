@@ -4,7 +4,6 @@ from re_tests_plugin import *
 conf_path = os.environ.get('TEMP') + "/" + "test_conf.conf"
 log_path = os.environ.get('TEMP') + "/" + "test_log.fbtrace_text"
 
-@pytest.mark.skipif(srv_version == "Firebird", reason="Not supported")
 def test_1(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
@@ -15,7 +14,8 @@ def test_1(open_connection):
     lackey.click("reddatabase_3.0.png")
     array_of_bars = list(lackey.findAll("empty_bar.png"))
     lackey.click(array_of_bars[8])
-    lackey.type(conf_path)
+    lackey.App.setClipboard(conf_path)
+    lackey.type("v",lackey.Key.CTRL)
     lackey.click("save.png")
     result1 = lackey.exists("bt_OK_blue.png")
     lackey.click("bt_OK_blue.png")
@@ -31,10 +31,13 @@ def test_1(open_connection):
     lackey.click(bts[1])
     lackey.type("a",lackey.Key.CTRL)
     lackey.type(lackey.Key.BACKSPACE) 
-    lackey.type(conf_path + "{ENTER}")
+    lackey.App.setClipboard(conf_path)
+    lackey.type("v",lackey.Key.CTRL)
+    lackey.type("{ENTER}")
     lackey.click("log_to_file.png")
     lackey.type("{TAB}{TAB}")
-    lackey.type(log_path)
+    lackey.App.setClipboard(log_path)
+    lackey.type("v",lackey.Key.CTRL)
     lackey.click("start.png")
 
     #fill log file
@@ -48,7 +51,7 @@ def test_1(open_connection):
     lackey.click("event_type.png")
     lackey.click("table_right.png")
     lackey.click("table_runner.png")
-    lackey.wheel(lackey.Mouse.WHEEL_DOWN, 14)
+    lackey.wheel(lackey.Mouse.WHEEL_DOWN, 15)
     lackey.click("username.png")
     lackey.click("table_right.png")
     lackey.click("type_query_service.png")
@@ -68,7 +71,6 @@ def test_1(open_connection):
     assert result1 != None
 
 
-@pytest.mark.skipif(srv_version == "Firebird", reason="Not supported")
 def test_2(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
@@ -76,7 +78,8 @@ def test_2(open_connection):
     bts_open_file = list(lackey.findAll("icon_open_file.png"))
     lackey.click(bts_open_file[1])
     lackey.click("file_name.png")
-    lackey.type(log_path)
+    lackey.App.setClipboard(log_path)
+    lackey.type("v",lackey.Key.CTRL)
     lackey.click("open.png")
     lackey.click(lackey.exists("filter_column.png").getTarget().right(100))
     lackey.click("filter_column_chosen.png")
