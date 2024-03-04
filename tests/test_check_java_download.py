@@ -64,7 +64,9 @@ def test_1():
     time.sleep(15)
     
     #test
+    lackey.SettingsMaster.MinSimilarity = 0.9
     lackey.click("rb_download_java_auto.png")
+    lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.click("bt_ok_java.png")
 
     while(not lackey.exists("icon_conn.png")):
