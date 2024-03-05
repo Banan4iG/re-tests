@@ -59,6 +59,7 @@ def action(type):
 
 def test_check_membership_role_to_user(open_connection):
     action("USER")
-    
+
+@pytest.mark.skipif((srv_version == "Firebird" and version == "3.0"), reason="Not supported")    
 def test_check_membership_role_to_role(open_connection):
     action("ROLE")
