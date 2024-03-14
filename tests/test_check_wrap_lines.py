@@ -16,11 +16,13 @@ create table
 """
     lackey.App.setClipboard(script)
     lackey.type("v", lackey.Key.CTRL)
+    result1 = lackey.exists("line_numbers.png")
     chb = lackey.exists("chb_wrap_lines.png")
     lackey.click(chb)
-    result = lackey.exists("line_numbers.png")
+    result2 = lackey.exists("line_numbers.png")
     lackey.click(chb.getTarget().below(20))
     lackey.type("a", lackey.Key.CTRL)
     lackey.type(lackey.Key.DELETE)
-    assert result != None
+    assert result1 != None
+    assert result2 == None
 

@@ -5,7 +5,7 @@ def click_comment():
     lackey.click("tab_properties.png")
     lackey.click("text_comment.png")
     mouse = lackey.Mouse()
-    lackey.click(mouse.getPos().below(100))
+    lackey.click(mouse.getPos().offset(30, 100))
 
 def test_1(open_connection):
     lackey.click("tree_plus.png")
