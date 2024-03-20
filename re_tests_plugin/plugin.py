@@ -56,7 +56,9 @@ def pytest_exception_interact(report):
     if report.failed:
         lackey.App.close("Red Expert")
         home_dir = os.path.expanduser("~")
-        os.remove(os.path.join(home_dir,'.redexpert/202301/ConnectionHistory.xml'))
+        history_file = os.path.join(home_dir,'.redexpert/202301/ConnectionHistory.xml')
+        if os.path.exists(history_file):
+            os.remove(history_file)
         open_app()
 
 @pytest.fixture
