@@ -18,6 +18,7 @@ def test_check_profiler_connection(open_connection):
     lackey.click("icon_cross.png")
     lackey.rightClick("text_Copy.png")
     lackey.click("text_Disconnect.png")
+    time.sleep(1)
     lackey.rightClick("text_Copy.png")
     lackey.click("tree_remove_conn.png")
     lackey.click("bt_yes.png")
