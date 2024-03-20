@@ -6,7 +6,7 @@ import os
 import subprocess
 from firebird.driver import driver_config
 from firebird.driver import connect_server
-from firebird.driver import SrvInfoCode
+from firebird.driver import SrvInfoCode, DirectoryCode
 
 
 driver_config.server_defaults.host.value = 'localhost'
@@ -15,6 +15,7 @@ driver_config.server_defaults.password.value = 'masterkey'
 
 
 with connect_server(server='localhost') as srv:
+    home_directory = srv.info.home_directory
     for ver in ["3.0", "5.0"]:
         index = srv.info.version.find(ver)
         if index > -1:
@@ -51,6 +52,12 @@ def open_app():
         time.sleep(7)
     return pid
 
+def pytest_exception_interact(report):
+    if report.failed:
+        lackey.App.close("Red Expert")
+        home_dir = os.path.expanduser("~")
+        os.remove(os.path.join(home_dir,'.redexpert/202301/ConnectionHistory.xml'))
+        open_app()
 
 @pytest.fixture
 def open_connection(request):
@@ -60,32 +67,8 @@ def open_connection(request):
     time.sleep(2)    #waiting time to open connection
     lackey.click("icon_conn_open.png")
     #actions after test:
-    tests_failed_before = request.session.testsfailed
     yield
-    tests_failed_after = request.session.testsfailed
-    if tests_failed_after == tests_failed_before:
-        lackey.doubleClick("icon_conn_open.png")
-    else:
-        lackey.App.close("Red Expert")
-        home_dir = os.path.expanduser("~")
-        os.remove(os.path.join(home_dir,'.redexpert/202301/ConnectionHistory.xml'))
-        open_app()
-        
-        # bt_cancel = lackey.exists("bt_cancel.png")
-        # if bt_cancel != None:
-        #     lackey.click(bt_cancel)
-        #     bt_yes = lackey.exists("bt_YES.png")
-        #     if bt_yes != None:
-        #         lackey.click(bt_yes)
-        # bt_close = lackey.exists("bt_close.png")
-        # if bt_close != None:
-        #     lackey.click(bt_close)
-        
-    
-    # if tests_failed_after > tests_failed_before:
-    #     bt_ok = lackey.exists("bt_OK_blue.png")
-    #     if bt_ok != None:
-    #         lackey.click(bt_ok)
+    lackey.doubleClick("icon_conn_open.png")
 
 @pytest.fixture(scope='session', autouse=True)
 def init_test_session(): 
