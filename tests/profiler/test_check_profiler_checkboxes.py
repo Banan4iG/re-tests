@@ -22,7 +22,7 @@ def test_check_profiler_checkboxes(open_connection):
     lackey.click("text_Compact_view.png")
     result2 = lackey.exists("icon_profiler_compact.png")
     lackey.click("text_Extended_view.png")
-    result3 = lackey.exists("checkbox_Extended.png")
+    result3 = lackey.exists("icon_profiler_extended.png")
     lackey.click("text_Compact_view.png")
     lackey.click("text_Round_Values.png")
     result4 = lackey.exists("text_Round_checkbox.png")
