@@ -62,7 +62,7 @@ def pytest_exception_interact(report):
         open_app()
 
 @pytest.fixture
-def open_connection(request):
+def open_connection():
     #actions befor test:
     lackey.App.focus("Red Expert")
     lackey.doubleClick("icon_conn.png")
@@ -70,7 +70,8 @@ def open_connection(request):
     lackey.click("icon_conn_open.png")
     #actions after test:
     yield
-    lackey.doubleClick("icon_conn_open.png")
+    if lackey.exists("icon_conn_open.png"):
+        lackey.doubleClick("icon_conn_open.png")
 
 @pytest.fixture(scope='session', autouse=True)
 def init_test_session(): 
