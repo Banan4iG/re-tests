@@ -169,24 +169,22 @@ def test_alter_exception(open_connection):
     assert result == 'test comment'
 
 def test_alter_udf(open_connection):
-    pass
-#     script = """
-# DECLARE EXTERNAL FUNCTION NEW_UDF
-# RETURNS
-# BIGINT
-# ENTRY_POINT ''
-# MODULE_NAME ''
-# """
-#     with fdb.connect('employee') as con:
-#         con.execute_immediate(script)
-#         con.commit()
-#     init_alter("icon_UDFs.png")
-#     lackey.doubleClick("")
-#     result = click_tab_comment("RDB$FUNCTIONS")
-#     with fdb.connect('employee') as con:
-#         con.execute_immediate("DROP FUNCTION NEW_UDF")
-#         con.commit()
-#     assert result == 'test comment'
+    script = """
+DECLARE EXTERNAL FUNCTION NEW_UDF
+RETURNS
+BIGINT
+ENTRY_POINT '123' MODULE_NAME '123'
+"""
+    with fdb.connect('employee') as con:
+        con.execute_immediate(script)
+        con.commit()
+    init_alter("icon_UDFs.png", reload=True)
+    lackey.doubleClick("udf_NEW_UDF.png")
+    result = click_tab_comment("RDB$FUNCTIONS")
+    with fdb.connect('employee') as con:
+        con.execute_immediate("DROP FUNCTION NEW_UDF")
+        con.commit()
+    assert result == 'test comment'
 
 def test_alter_user(open_connection):
     init_alter("icon_users.png")
