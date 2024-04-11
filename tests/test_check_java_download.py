@@ -69,8 +69,10 @@ def test_1():
     lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.click("bt_ok_java.png")
 
-    while(not lackey.exists("icon_conn.png")):
-        time.sleep(1)
+    count = 1
+    while(not lackey.exists("icon_conn.png") or count == 5):
+        time.sleep(5)
+        count += 1
     result = lackey.exists("icon_conn.png")
 
     lackey.App.close("Red Expert")
