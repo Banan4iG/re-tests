@@ -8,7 +8,7 @@ import winreg
 import subprocess
 
 
-#@pytest.mark.skip(reason="This test no work yet")
+@pytest.mark.skipif((srv_version == "RedDatabase" and version == "3.0"), reason="Why is Java not downloaded in the virtual machine in CI when using RGB 3.0")
 def test_1():
     #prepare
     lackey.App.close("Red Expert")
