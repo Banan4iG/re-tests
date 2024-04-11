@@ -58,13 +58,14 @@ def pytest_exception_interact(report):
         home_dir = os.path.expanduser("~")
         history_file = os.path.join(home_dir,'.redexpert/202301/ConnectionHistory.xml')
         saved_conn_file = os.path.join(home_dir,'.redexpert/202301/savedconnections.xml')
-        with open(saved_conn_file, 'r') as f:
-            context = f.read()
-        
-        context = context[:2139] + "\n\n</savedconnections>"
-        
-        with open(saved_conn_file, 'w') as f:
-            f.write(context)
+        if os.path.exists(saved_conn_file):
+            with open(saved_conn_file, 'r') as f:
+                context = f.read()
+            
+            context = context[:2139] + "\n\n</savedconnections>"
+            
+            with open(saved_conn_file, 'w') as f:
+                f.write(context)
 
         if os.path.exists(history_file):
             os.remove(history_file)
