@@ -6,7 +6,7 @@ def create_new_conn():
     keyboard.press('ctrl')
     lackey.type('n', lackey.Key.SHIFT)
     keyboard.release('ctrl')
-    time.slep(2)
+    time.sleep(2)
     lackey.type("{TAB}"*6)
     lackey.type("employee.fdb")
     lackey.type("{TAB}"*8)
