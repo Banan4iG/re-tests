@@ -20,34 +20,24 @@ end
     lackey.click("tree_reload_menu.png")
     lackey.click("tools.png")
     lackey.click("tab_grant_manager.png")
-    result1 = lackey.exists("text_PUBLIC.png")
-    lackey.click("text_Users.png")
-    lackey.click("text_Roles.png")
-    result2 = lackey.exists("text_PUBLIC.png")
-    lackey.click("text_Roles.png")
-    lackey.click("text_Views.png")
-    result3 = lackey.exists("text_PUBLIC.png")
-    lackey.click("text_Views.png")
-    lackey.click("text_Triggers.png")
-    result4 = lackey.exists("text_PUBLIC.png")
-    lackey.click("text_Triggers.png")
-    lackey.click("text_Procedures.png")
-    result5 = lackey.exists("text_PUBLIC.png")
-    lackey.click("text_Procedures.png")
-    lackey.click("text_Functions.png")
-    result6 = lackey.exists("text_PUBLIC.png")
-    lackey.click("text_Functions.png")
-    lackey.click("text_Packages.png")
-    result7 = lackey.exists("text_PUBLIC.png")
+    results = []
+    results.append(lackey.exists("text_PUBLIC.png"))
+    
+    list_b = list(lackey.findAll("button_down.png"))
+    b = max(list_b, key=lambda i: i.getTarget().getY())
+    b = b.getTarget()
+
+    for _ in range(6):
+        lackey.click(b)
+        lackey.type("{DOWN}")
+        results.append(lackey.exists("text_PUBLIC.png"))
+
     lackey.click("icon_cross.png")
     with fdb.connect("employee") as con:
         con.execute_immediate("DROP FUNCTION NEW_FUNC;")
         con.execute_immediate("DROP PACKAGE NEW_PACK;")
         con.commit()
-    assert result1 == None
-    assert result2 != None
-    assert result3 == None
-    assert result4 == None
-    assert result5 == None
-    assert result6 == None
-    assert result7 == None
+    
+    if results[1] != None:
+        results[1] = True
+    assert results == [None, True, None, None, None, None, None]

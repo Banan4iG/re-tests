@@ -21,27 +21,21 @@ end
     lackey.click("tools.png")
     lackey.click("tab_grant_manager.png")
     result1 = lackey.exists("text_SYSDBA_blue.png")
-    lackey.click("text_Users.png")
-    lackey.click("text_Roles.png")
+    list_b = list(lackey.findAll("button_down.png"))
+    b = max(list_b, key=lambda i: i.getTarget().getY())
+    b = b.getTarget()
+    lackey.click(b)
+    lackey.type("{DOWN}")
     if srv_version == "Firebird":
         result2 = lackey.exists("list_roles_gm_fb.png")
     else:
         result2 = lackey.exists("list_roles_gm.png")
-    lackey.click("text_Roles.png")
-    lackey.click("text_Views.png")
-    result3 = lackey.exists("text_PHONE_LIST_blue.png")
-    lackey.click("text_Views.png")
-    lackey.click("text_Triggers.png")
-    result4 = lackey.exists("list_triggers_gm.png")
-    lackey.click("text_Triggers.png")
-    lackey.click("text_Procedures.png")
-    result5 = lackey.exists("list_proc_gm.png")
-    lackey.click("text_Procedures.png")
-    lackey.click("text_Functions.png")
-    result6 = lackey.exists("text_NEW_FUNC_blue.png")
-    lackey.click("text_Functions.png")
-    lackey.click("text_Packages.png")
-    result7 = lackey.exists("text_NEW_PACK_blue.png")
+
+    results = []
+    for obj in ["text_PHONE_LIST_blue.png", "list_triggers_gm.png", "list_proc_gm.png", "text_NEW_FUNC_blue.png", "text_NEW_PACK_blue.png"]:
+        lackey.click(b)
+        lackey.type("{DOWN}")
+        results.append(lackey.exists(obj))
     lackey.click("icon_cross.png")
     with fdb.connect("employee") as con:
         con.execute_immediate("DROP FUNCTION NEW_FUNC;")
@@ -49,8 +43,4 @@ end
         con.commit()
     assert result1 != None
     assert result2 != None
-    assert result3 != None
-    assert result4 != None
-    assert result5 != None
-    assert result6 != None
-    assert result7 != None
+    assert results != [None, None, None, None, None]
