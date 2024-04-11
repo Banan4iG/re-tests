@@ -9,7 +9,7 @@ log_path = os.environ.get('TEMP') + "/" + "test_log.fbtrace_text"
 def test_1(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
-    
+    time.sleep(3)
     #conf file creation
     lackey.click("bt_buildconfigurationfile.png")
     lackey.click(lackey.exists("server_version.png").getTarget().right(50))
@@ -77,7 +77,7 @@ def test_1(open_connection):
 def test_2(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
-    time.sleep(2)
+    time.sleep(3)
     bts_open_file = list(lackey.findAll("icon_open_file.png"))
     lackey.click(bts_open_file[1])
     lackey.click("file_name.png")

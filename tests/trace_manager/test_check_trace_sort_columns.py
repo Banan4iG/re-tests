@@ -13,6 +13,7 @@ avaible_actions = (
 def test_1():
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
+    time.sleep(3)
     lackey.click("icon_visible_columns.png")
     lackey.click("bt_dbl_triangle_left.png")
     bt = lackey.exists("bt_dbl_triangle_right.png")
