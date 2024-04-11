@@ -62,10 +62,11 @@ def pytest_exception_interact(report):
             with open(saved_conn_file, 'r') as f:
                 context = f.read()
             
-            context = context[:2139] + "\n\n</savedconnections>"
+            if "</connection>" in context:
+                context = context[:context.find("</connection>")] + "</connection>\n\n</savedconnections>"
             
-            with open(saved_conn_file, 'w') as f:
-                f.write(context)
+                with open(saved_conn_file, 'w') as f:
+                    f.write(context)
 
         if os.path.exists(history_file):
             os.remove(history_file)
