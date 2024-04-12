@@ -47,6 +47,7 @@ def create_connect(test_base_path: str):
 	keyboard.press('ctrl')
 	lackey.type('n', lackey.Key.SHIFT)
 	keyboard.release('ctrl')
+	time.sleep(2)
 	lackey.type("{TAB}"*6)
 	lackey.type("v", lackey.Key.CTRL)
 	lackey.type("{TAB}"*8)
@@ -128,9 +129,11 @@ def test_execute_script():
 	start(rdb5)
 	lackey.click("tab_SQL.png")
 	lackey.click("bt_execute_script.png")
-
+	time.sleep(2)
 	lackey.click("button_down.png")
-	lackey.click("text_new_connection_1.png")
+	list_b = list(lackey.findAll("text_new_connection_1.png"))
+	b = max(list_b, key=lambda i: i.getTarget().getX())
+	lackey.click(b.getTarget())
 
 	lackey.type("f", lackey.Key.CTRL)
 	lackey.type("a", lackey.Key.CTRL)

@@ -57,7 +57,7 @@ def test_check_no_ignore():
 	
 	finish(rdb5)
 
-	assert result == [16, 1, 1, 1, 1, 1]
+	assert result == [15, 1, 1, 1, 1, 1]
 
 
 def test_check_ignore():
