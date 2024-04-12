@@ -68,11 +68,13 @@ def test_1():
     lackey.click("rb_download_java_auto.png")
     lackey.SettingsMaster.MinSimilarity = 0.97
     lackey.click("bt_ok_java.png")
-
-    count = 1
-    while(not lackey.exists("icon_conn.png") or count == 5):
-        time.sleep(5)
+    count = 0
+    while (count != 5):
+        if lackey.exists("icon_conn.png") != None:
+            break
         count += 1
+        time.sleep(5)
+
     result = lackey.exists("icon_conn.png")
 
     lackey.App.close("Red Expert")

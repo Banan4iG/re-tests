@@ -30,8 +30,13 @@ def click_tab_column(param):
     lackey.click(tab)
     mouse = lackey.Mouse()
     mouse.move(tab.getTarget().below(20))
+    count = 0
     while lackey.exists("table_column_Comment.png") == None:
         lackey.wheel(lackey.Mouse.WHEEL_DOWN, 1)
+        if (count == 10):
+            break
+        count += 1   
+    
     lackey.click(lackey.exists("table_column_Comment.png").getTarget().below(20))
     lackey.type("test comment")
     lackey.type("{ENTER}")

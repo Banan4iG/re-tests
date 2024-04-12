@@ -32,8 +32,13 @@ def test_1():
 	lackey.rightClick("icon_conn_open.png")
 	lackey.click("tree_export_metadata_menu.png")
 	lackey.click("bt_extract.png")
-	while lackey.exists("icon_massage.png") == None:
-		time.sleep(1)
+	count = 0
+	while (count != 5):
+		if lackey.exists("icon_massage.png") != None:
+			break
+		count += 1
+		time.sleep(5)
+	
 	lackey.click("bt_OK_blue.png")
 	time.sleep(0.5)
 	lackey.click("tab_view.png")

@@ -16,8 +16,12 @@ def start(rdb5: bool):
 	lackey.rightClick(b.getTarget())
 	lackey.click("tree_export_metadata_menu.png")
 	lackey.click("bt_extract.png")
-	while lackey.exists("icon_massage.png") == None:
-		time.sleep(1)
+	count = 0
+	while (count != 5):
+		if lackey.exists("icon_massage.png") != None:
+			break
+		count += 1
+		time.sleep(5)
 	lackey.click("bt_OK_blue.png")
 	time.sleep(0.5)
 
@@ -59,8 +63,12 @@ def compare_db(test_base_path: str):
 	b = min(list_b, key=lambda i: i.getTarget().getX())
 	lackey.click(b.getTarget())
 	lackey.click("bt_compare.png")
-	while lackey.exists("icon_massage.png") == None:
-		time.sleep(1)
+	count = 0
+	while (count != 5):
+		if lackey.exists("icon_massage.png") != None:
+			break
+		count += 1
+		time.sleep(5)
 	lackey.SettingsMaster.MinSimilarity = 0.99
 	result = lackey.exists("compare_result.png")
 	lackey.SettingsMaster.MinSimilarity = 0.97
