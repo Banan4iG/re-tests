@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_object_list(open_connection):
+def test_check_object_list(lock_employee, open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("CREATE GLOBAL TEMPORARY TABLE NEW_TABLE (TETS BIGINT) ON COMMIT DELETE ROWS;")
         con.execute_immediate("""
@@ -64,11 +64,6 @@ end
     lackey.click("user_SYSDBA_blue.png")
     result16 = len(list(lackey.findAll("icon_exceptions.png")))
     lackey.click("icon_cross.png")
-    with fdb.connect("employee") as con:
-        con.execute_immediate("DROP TABLE NEW_TABLE;")
-        con.execute_immediate("DROP FUNCTION NEW_FUNC;")
-        con.execute_immediate("DROP PACKAGE NEW_PACK;")
-        con.commit()
     assert result1 == 10
     assert result2 == 0
     assert result3 == 1

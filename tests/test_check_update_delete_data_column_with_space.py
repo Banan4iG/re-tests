@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_data_with_space(open_connection):
+def test_data_with_space(lock_employee, open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("CREATE TABLE NEW_TABLE_1(\"TEST COL\" VARCHAR(50));")
         con.commit()
@@ -35,8 +35,5 @@ def test_data_with_space(open_connection):
         result2 = cur.fetchone()
         cur.close()
     lackey.click("icon_cross.png")
-    with fdb.connect("employee") as con:
-        con.execute_immediate("DROP TABLE NEW_TABLE_1;")
-        con.commit()
     assert result1 == ('PUBLIC',)
     assert result2 == None

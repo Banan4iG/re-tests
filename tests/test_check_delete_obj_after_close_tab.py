@@ -2,7 +2,7 @@ import lackey
 from re_tests_plugin import *
 import firebird.driver as fdb
 
-def test_1(open_connection):
+def test_1(lock_employee, open_connection):
     script = """
 CREATE OR ALTER FUNCTION NEW_FUNC
 RETURNS VARCHAR(5)

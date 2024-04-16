@@ -50,16 +50,13 @@ def test_alter_table(open_connection):
     result = click_tab_comment("RDB$RELATIONS", table=True)
     assert result == 'test comment'
 
-def test_alter_gtt(open_connection):
+def test_alter_gtt(lock_employee, open_connection):
     with fdb.connect('employee') as con:
         con.execute_immediate('CREATE GLOBAL TEMPORARY TABLE NEW_GTT (TESTS BIGINT) ON COMMIT DELETE ROWS')
         con.commit()
     init_alter("icon_gtt.png", reload=True)
     lackey.doubleClick("tree_gtt_name_NGTT.png")
     result = click_tab_comment("RDB$RELATIONS", table=True)
-    with fdb.connect('employee') as con:
-        con.execute_immediate('DROP TABLE NEW_GTT')
-        con.commit()
     assert result == 'test comment'
 
 def test_alter_view(open_connection):
@@ -74,7 +71,7 @@ def test_alter_procedure(open_connection):
     result = click_tab_comment("RDB$PROCEDURES")
     assert result == 'test comment'
 
-def test_alter_function(open_connection):
+def test_alter_function(lock_employee, open_connection):
     script = """
 CREATE OR ALTER FUNCTION NEW_FUNC
 RETURNS VARCHAR(5)
@@ -89,12 +86,9 @@ end
     init_alter("icon_functions.png", reload=True)
     lackey.doubleClick("func_NEW_FUNC.png")
     result = click_tab_comment("RDB$FUNCTIONS")
-    with fdb.connect('employee') as con:
-        con.execute_immediate('DROP FUNCTION NEW_FUNC')
-        con.commit()
     assert result == 'test comment'
 
-def test_alter_package(open_connection):
+def test_alter_package(lock_employee, open_connection):
     script1 = """
 CREATE OR ALTER PACKAGE NEW_PACK
 AS
@@ -107,9 +101,6 @@ END
     init_alter("icon_packages.png", reload=True)
     lackey.doubleClick("pack_NEW_PACK.png")
     result = click_tab_comment("RDB$PACKAGES")
-    with fdb.connect('employee') as con:
-        con.execute_immediate('DROP PACKAGE NEW_PACK')
-        con.commit()
     assert result == 'test comment'
 
 def test_alter_trigger_for_table(open_connection):
@@ -118,7 +109,7 @@ def test_alter_trigger_for_table(open_connection):
     result = click_tab_comment("RDB$TRIGGERS")
     assert result == 'test comment'
 
-def test_alter_trigger_for_ddl(open_connection):
+def test_alter_trigger_for_ddl(lock_employee, open_connection):
     script = """
 CREATE OR ALTER TRIGGER NEW_TRIGGER
 ACTIVE BEFORE ANY DDL STATEMENT POSITION 0
@@ -132,12 +123,9 @@ END
     init_alter("icon_triggers_for_ddl.png", reload=True)
     lackey.doubleClick("trigger_for_DDL_NEW_TRIGGER.png")
     result = click_tab_comment("RDB$TRIGGERS")
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP TRIGGER NEW_TRIGGER")
-        con.commit()
     assert result == 'test comment'
 
-def test_alter_trigger_for_db(open_connection):
+def test_alter_trigger_for_db(lock_employee, open_connection):
     script = """
 CREATE OR ALTER TRIGGER NEW_TRIGGER
 ACTIVE ON CONNECT POSITION 0
@@ -151,9 +139,6 @@ END
     init_alter("icon_triggers_for_db.png", reload=True)
     lackey.doubleClick("trigger_for_DB_NEW_TRIGGER.png")
     result = click_tab_comment("RDB$TRIGGERS")
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP TRIGGER NEW_TRIGGER")
-        con.commit()
     assert result == 'test comment'
 
 def test_alter_sequence(open_connection):
@@ -168,7 +153,7 @@ def test_alter_exception(open_connection):
     result = click_tab_comment("RDB$EXCEPTIONS")
     assert result == 'test comment'
 
-def test_alter_udf(open_connection):
+def test_alter_udf(lock_employee, open_connection):
     script = """
 DECLARE EXTERNAL FUNCTION NEW_UDF
 RETURNS
@@ -181,9 +166,6 @@ ENTRY_POINT '123' MODULE_NAME '123'
     init_alter("icon_UDFs.png", reload=True)
     lackey.doubleClick("udf_NEW_UDF.png")
     result = click_tab_comment("RDB$FUNCTIONS")
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP FUNCTION NEW_UDF")
-        con.commit()
     assert result == 'test comment'
 
 def test_alter_user(open_connection):
@@ -192,14 +174,11 @@ def test_alter_user(open_connection):
     result = click_tab_comment("SEC$USERS")
     assert result == 'test comment'
 
-def test_alter_role(open_connection):
+def test_alter_role(lock_employee, open_connection):
     with fdb.connect('employee') as con:
         con.execute_immediate("CREATE ROLE NEW_ROLE")
         con.commit()
     init_alter("icon_roles.png", reload=True)
     lackey.doubleClick("role_NEW_ROLE.png")
     result = click_tab_comment("RDB$ROLES")
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP ROLE NEW_ROLE")
-        con.commit()
     assert result == 'test comment'

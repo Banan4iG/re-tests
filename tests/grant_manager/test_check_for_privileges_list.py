@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_for_privileges_list(open_connection):
+def test_check_for_privileges_list(lock_employee, open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("""
 CREATE OR ALTER FUNCTION NEW_FUNC
@@ -37,10 +37,6 @@ end
         lackey.type("{DOWN}")
         results.append(lackey.exists(obj))
     lackey.click("icon_cross.png")
-    with fdb.connect("employee") as con:
-        con.execute_immediate("DROP FUNCTION NEW_FUNC;")
-        con.execute_immediate("DROP PACKAGE NEW_PACK;")
-        con.commit()
     assert result1 != None
     assert result2 != None
     assert results != [None, None, None, None, None]

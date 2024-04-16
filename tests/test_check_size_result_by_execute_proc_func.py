@@ -18,7 +18,7 @@ def test_check_proc(open_connection):
     assert result1 != None
     assert result2 != None
 
-def test_check_func(open_connection):
+def test_check_func(lock_employee, open_connection):
     script = """
 CREATE OR ALTER FUNCTION NEW_FUNC
 RETURNS VARCHAR(5)
@@ -45,8 +45,5 @@ end
     result2 =  lackey.exists("output_func_NEW_FUNC.png")
     lackey.type(lackey.Key.ESC)
     lackey.click("bt_cancel.png")
-    with fdb.connect('employee.fdb') as con:
-        con.execute_immediate("DROP FUNCTION NEW_FUNC")
-        con.commit()
     assert result1 != None
     assert result2 != None
