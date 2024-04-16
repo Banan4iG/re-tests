@@ -6,7 +6,7 @@ def click_top_button(image):
     b = min(list_b, key=lambda i: i.getTarget().getY())
     return b.getTarget()
 
-def test_check_revoke_grant_buttons(open_connection):
+def test_check_revoke_grant_buttons():
     pass
     # NEED FULL REWORK!!!
 

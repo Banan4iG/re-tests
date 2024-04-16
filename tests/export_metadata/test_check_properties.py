@@ -43,12 +43,11 @@ def extract():
 	lackey.type('c', lackey.Key.CTRL)
 
 def finish(rdb5: bool):
-	delete_objects(rdb5)
 	lackey.rightClick("tab_export_metadata_blue.png")
 	lackey.click("bt_tab_close_all.png")
 	lackey.doubleClick("icon_conn_open.png")
 
-def test_check_no_ignore():
+def test_check_no_ignore(lock_employee):
 	rdb5 = init_extract()
 	extract()
 	script_without_properties = lackey.App.getClipboard()
@@ -60,7 +59,7 @@ def test_check_no_ignore():
 	assert result == [15, 1, 1, 1, 1, 1]
 
 
-def test_check_ignore():
+def test_check_ignore(lock_employee):
 	rdb5 = init_extract()
 	
 	list_b = list(lackey.findAll("bt_select_all.png"))

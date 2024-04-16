@@ -68,33 +68,33 @@ end
 """)
         con.commit()
 
-def delete_objects(rdb5: bool):
-    with fdb.connect("employee") as con:
+# def delete_objects(rdb5: bool):
+#     with fdb.connect("employee") as con:
 
-        #remove objects
-        con.execute_immediate("DROP TABLE NEW_GLOBAL_TEMPORARY_1")
-        con.execute_immediate("DROP FUNCTION NEW_FUNC")
-        con.execute_immediate("DROP PACKAGE NEW_PACK")
-        con.execute_immediate("DROP TRIGGER NEW_DDL_TRIGGER")
-        con.execute_immediate("DROP TRIGGER NEW_DB_TRIGGER")
-        con.execute_immediate("DROP EXTERNAL FUNCTION NEW_UDF")
-        con.execute_immediate("DROP ROLE TEST_ROLE")
-        con.execute_immediate("DROP COLLATION iso8859_1_unicode")
+#         #remove objects
+#         con.execute_immediate("DROP TABLE NEW_GLOBAL_TEMPORARY_1")
+#         con.execute_immediate("DROP FUNCTION NEW_FUNC")
+#         con.execute_immediate("DROP PACKAGE NEW_PACK")
+#         con.execute_immediate("DROP TRIGGER NEW_DDL_TRIGGER")
+#         con.execute_immediate("DROP TRIGGER NEW_DB_TRIGGER")
+#         con.execute_immediate("DROP EXTERNAL FUNCTION NEW_UDF")
+#         con.execute_immediate("DROP ROLE TEST_ROLE")
+#         con.execute_immediate("DROP COLLATION iso8859_1_unicode")
 
-        #remove comment
-        con.execute_immediate("COMMENT ON DOMAIN EMPNO IS ''")
-        con.execute_immediate("COMMENT ON TABLE EMPLOYEE IS ''")
-        con.execute_immediate("COMMENT ON VIEW PHONE_LIST IS ''")
-        con.execute_immediate("COMMENT ON PROCEDURE ADD_EMP_PROJ IS ''")
-        con.execute_immediate("COMMENT ON TRIGGER POST_NEW_ORDER IS ''")
-        con.execute_immediate("COMMENT ON SEQUENCE CUST_NO_GEN IS ''")
-        con.execute_immediate("COMMENT ON EXCEPTION CUSTOMER_CHECK IS ''")
-        con.execute_immediate("COMMENT ON INDEX CHANGEX IS ''")
+#         #remove comment
+#         con.execute_immediate("COMMENT ON DOMAIN EMPNO IS ''")
+#         con.execute_immediate("COMMENT ON TABLE EMPLOYEE IS ''")
+#         con.execute_immediate("COMMENT ON VIEW PHONE_LIST IS ''")
+#         con.execute_immediate("COMMENT ON PROCEDURE ADD_EMP_PROJ IS ''")
+#         con.execute_immediate("COMMENT ON TRIGGER POST_NEW_ORDER IS ''")
+#         con.execute_immediate("COMMENT ON SEQUENCE CUST_NO_GEN IS ''")
+#         con.execute_immediate("COMMENT ON EXCEPTION CUSTOMER_CHECK IS ''")
+#         con.execute_immediate("COMMENT ON INDEX CHANGEX IS ''")
 
-        if rdb5:
-            con.execute_immediate("DROP TABLESPACE NEW_TABLESPACE_1;")
-            con.execute_immediate("DROP JOB NEW_JOB;")
-        con.commit()
+#         if rdb5:
+#             con.execute_immediate("DROP TABLESPACE NEW_TABLESPACE_1;")
+#             con.execute_immediate("DROP JOB NEW_JOB;")
+#         con.commit()
 
 #sql script
 """

@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_data_warning(open_connection):
+def test_check_data_warning(lock_employee, open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("CREATE TABLE NEW_TABLE_1(TEST_COL int);")
         con.commit()
@@ -22,7 +22,4 @@ def test_check_data_warning(open_connection):
     result1 = lackey.exists("text_apply_changes.png")
     lackey.click("text_Yes.png")
     lackey.click("icon_cross.png")
-    with fdb.connect("employee") as con:
-        con.execute_immediate("DROP TABLE NEW_TABLE_1;")
-        con.commit()
     assert result1 != None

@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_constraints_spacebar(open_connection):
+def test_check_constraints_spacebar(lock_employee, open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("CREATE TABLE NEW_TABLE_1(PUBLIC int);")
         con.commit()
@@ -20,7 +20,4 @@ def test_check_constraints_spacebar(open_connection):
     lackey.click("bt_commit.png")
     result = lackey.exists("text_TEST.png")
     lackey.click("icon_cross.png")
-    with fdb.connect("employee") as con:
-        con.execute_immediate("DROP TABLE NEW_TABLE_1;")
-        con.commit()
     assert result != None

@@ -82,7 +82,7 @@ def test_alter_procedure_output_p(open_connection):
     assert result3 != None
     assert result4 != None
 
-def test_alter_function(open_connection):
+def test_alter_function(lock_employee, open_connection):
     script = """
 CREATE OR ALTER FUNCTION NEW_FUNC
 RETURNS VARCHAR(5)
@@ -96,15 +96,12 @@ end
         con.commit()
     init_alter("icon_functions.png", "func_NEW_FUNC.png", reload=True)
     result1, result2, result3, result4 = click_tab_comment()
-    with fdb.connect('employee') as con:
-        con.execute_immediate('DROP FUNCTION NEW_FUNC')
-        con.commit()
     assert result1 == 2
     assert result2 != None
     assert result3 != None
     assert result4 != None
 
-def test_alter_function_arg(open_connection):
+def test_alter_function_arg(lock_employee, open_connection):
     script = """
 CREATE OR ALTER FUNCTION NEW_FUNC ("test" BIGINT)
 RETURNS VARCHAR(5)
@@ -113,20 +110,17 @@ begin
   RETURN 'five';
 end
 """
-    with fdb.connect('employee') as con:
+    with fdb.connect('employee,fdb') as con:
         con.execute_immediate(script)
         con.commit()
     init_alter("icon_functions.png", "func_NEW_FUNC.png", reload=True)
     result1, result2, result3, result4 = click_tab_column("tab_arguments.png")
-    with fdb.connect('employee') as con:
-        con.execute_immediate('DROP FUNCTION NEW_FUNC')
-        con.commit()
     assert result1 == 2
     assert result2 != None
     assert result3 != None
     assert result4 != None
 
-def test_alter_package(open_connection):
+def test_alter_package(lock_employee, open_connection):
     script1 = """
 CREATE OR ALTER PACKAGE NEW_PACK
 AS
@@ -145,9 +139,6 @@ END
         con.commit()
     init_alter("icon_packages.png", "pack_NEW_PACK.png", reload=True)
     result1, result2, result3, result4 = click_tab_comment()
-    with fdb.connect('employee') as con:
-        con.execute_immediate('DROP PACKAGE NEW_PACK')
-        con.commit()
     assert result1 == 3
     assert result2 != None
     assert result3 != None
@@ -161,7 +152,7 @@ def test_alter_trigger_for_table(open_connection):
     assert result3 != None
     assert result4 != None
 
-def test_alter_trigger_for_ddl(open_connection):
+def test_alter_trigger_for_ddl(lock_employee, open_connection):
     script = """
 CREATE OR ALTER TRIGGER NEW_TRIGGER
 ACTIVE BEFORE ANY DDL STATEMENT POSITION 0
@@ -174,15 +165,12 @@ END
         con.commit()
     init_alter("icon_triggers_for_ddl.png", "trigger_for_DDL_NEW_TRIGGER.png", reload=True)
     result1, result2, result3, result4 = click_tab_comment()
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP TRIGGER NEW_TRIGGER")
-        con.commit()
     assert result1 == 2
     assert result2 != None
     assert result3 != None
     assert result4 != None
 
-def test_alter_trigger_for_db(open_connection):
+def test_alter_trigger_for_db(lock_employee, open_connection):
     script = """
 CREATE OR ALTER TRIGGER NEW_TRIGGER
 ACTIVE ON CONNECT POSITION 0
@@ -195,9 +183,6 @@ END
         con.commit()
     init_alter("icon_triggers_for_db.png", "trigger_for_DB_NEW_TRIGGER.png", reload=True)
     result1, result2, result3, result4 = click_tab_comment()
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP TRIGGER NEW_TRIGGER")
-        con.commit()
     assert result1 == 2
     assert result2 != None
     assert result3 != None
@@ -219,7 +204,7 @@ def test_alter_exception(open_connection):
     assert result3 != None
     assert result4 != None
 
-def test_alter_udf(open_connection):
+def test_alter_udf(lock_employee, open_connection):
     script = """
 DECLARE EXTERNAL FUNCTION NEW_UDF
 RETURNS
@@ -231,9 +216,6 @@ ENTRY_POINT '123' MODULE_NAME '123'
         con.commit()
     init_alter("icon_UDFs.png", "udf_NEW_UDF.png", reload=True)
     result1, result2, result3, result4 = click_tab_comment()
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP FUNCTION NEW_UDF")
-        con.commit()
     assert result1 == 3
     assert result2 != None
     assert result3 != None
@@ -247,15 +229,12 @@ def test_alter_user(open_connection):
     assert result3 != None
     assert result4 != None
 
-def test_alter_role(open_connection):
+def test_alter_role(lock_employee, open_connection):
     with fdb.connect('employee') as con:
         con.execute_immediate("CREATE ROLE NEW_ROLE")
         con.commit()
     init_alter("icon_roles.png","role_NEW_ROLE.png", reload=True)
     result1, result2, result3, result4 = click_tab_comment()
-    with fdb.connect('employee') as con:
-        con.execute_immediate("DROP ROLE NEW_ROLE")
-        con.commit()
     assert result1 == 1
     assert result2 != None
     assert result3 != None

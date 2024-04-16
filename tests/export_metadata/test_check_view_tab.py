@@ -2,7 +2,7 @@ import lackey
 from re_tests_plugin import * 
 import firebird.driver as fdb
 import time
-from . import create_objects, delete_objects
+from . import create_objects
 
 def count_obj(icon):
 	plus = plus_find(icon)
@@ -12,7 +12,7 @@ def count_obj(icon):
 	return count_objs
 
 
-def test_1():
+def test_1(lock_employee):
 	rdb5 = True if (version == "5.0" and srv_version == "RedDatabase") else False 
 	
 	create_objects(rdb5)
@@ -50,11 +50,8 @@ def test_1():
 	for obj in list_obj:
 		list_count_obj_actual.append(count_obj(f"icon_{obj}.png"))
 
-	delete_objects(rdb5)
-
 	lackey.rightClick("tab_db_metadata_blue.png")
 	lackey.click("bt_tab_close_all.png")
-	
 	
 	list_count_obj_expected = [16, 11, 2, 2, 11, 2, 2, 5, 2, 2, 3, 6, 2, 3, 13, 2]
 

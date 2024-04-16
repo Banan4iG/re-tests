@@ -11,7 +11,7 @@ def check_user(number):
     lackey.click("bt_OK.png")
     return result
 
-def test_1(open_connection):
+def test_1(lock_employee, open_connection):
     with fdb.connect('employee') as con:
         cur = con.cursor()
         cur.execute('CREATE USER "DEMO" PASSWORD \'pass\'')

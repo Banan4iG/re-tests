@@ -3,7 +3,7 @@ from re_tests_plugin import *
 import firebird.driver as fdb
 
 
-def test_check_role_public(open_connection):
+def test_check_role_public(lock_employee, open_connection):
     with fdb.connect("employee") as con:
         con.execute_immediate("""
 CREATE OR ALTER FUNCTION NEW_FUNC
@@ -33,10 +33,6 @@ end
         results.append(lackey.exists("text_PUBLIC.png"))
 
     lackey.click("icon_cross.png")
-    with fdb.connect("employee") as con:
-        con.execute_immediate("DROP FUNCTION NEW_FUNC;")
-        con.execute_immediate("DROP PACKAGE NEW_PACK;")
-        con.commit()
     
     if results[1] != None:
         results[1] = True
