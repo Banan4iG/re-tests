@@ -9,9 +9,52 @@ from firebird.driver import driver_config
 from firebird.driver import connect_server
 from firebird.driver import SrvInfoCode, DirectoryCode
 
-home_directory = str()
-version = str()
-srv_version = str()
+
+class Variables:
+    def __init__(self):
+        self.home_directory = home_directory
+        self.version = version
+        self.srv_version = srv_version
+    
+    @property
+    def get_home(self):
+        return self.home_directory
+    
+    @property
+    def get_version(self):
+        return self.version
+    
+    @property
+    def get_srv_version(self):
+        return self.srv_version
+
+
+home_directory = ""
+version = ""
+srv_version = ""
+
+def pytest_configure():
+    global home_directory
+    global version
+    global srv_version
+
+    driver_config.server_defaults.host.value = 'localhost'
+    driver_config.server_defaults.user.value = 'SYSDBA'
+    driver_config.server_defaults.password.value = 'masterkey'
+    
+    with connect_server(server='localhost', user='SYSDBA', password='masterkey') as srv:
+        home_directory = srv.info.home_directory
+        for ver in ["3.0", "5.0"]:
+            index = srv.info.version.find(ver)
+            if index > -1:
+                version = ver
+                break
+
+        for srv_ver in ["Firebird", "RedDatabase"]:
+            index = srv.info.get_info(SrvInfoCode.SERVER_VERSION).find(srv_ver)
+            if index > -1:
+                srv_version = srv_ver
+                break
 
 def plus_find(name_of_the_group):
     return lackey.exists(name_of_the_group).getTarget().left(25)
@@ -65,6 +108,9 @@ def lock_employee():
     if os.path.exists(delta_file): 
         os.remove(delta_file)
     subprocess.run([f"{home_directory}nbackup.exe", "-F", f"{home_directory}examples/empbuild/employee.fdb"])
+    ts_file = home_directory + "examples/empbuild/file.ts"
+    if os.path.exists(ts_file):
+        os.remove(ts_file)
     
 @pytest.fixture()
 def copy_employee():
@@ -95,30 +141,6 @@ def open_connection():
 
 @pytest.fixture(scope='session', autouse=True)
 def init_test_session():
-    global home_directory
-    global version
-    global srv_version
-
-    driver_config.server_defaults.host.value = 'localhost'
-    driver_config.server_defaults.user.value = 'SYSDBA'
-    driver_config.server_defaults.password.value = 'masterkey'
-
-    with connect_server(server='localhost') as srv:
-        home_directory = srv.info.home_directory
-        for ver in ["3.0", "5.0"]:
-            index = srv.info.version.find(ver)
-            if index > -1:
-                version = ver
-                break
-    
-        for srv_ver in ["Firebird", "RedDatabase"]:
-            index = srv.info.get_info(SrvInfoCode.SERVER_VERSION).find(srv_ver)
-            if index > -1:
-                srv_version = srv_ver
-                break
-
-    print(version, srv_version)
-
     pid = open_app()
     lackey.App.focus("Red Expert")
     image_path = ["files/images/"]
