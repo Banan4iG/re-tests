@@ -1,8 +1,11 @@
 import lackey
 from re_tests_plugin import *
 
+vars = Variables()
+ver = vars.get_version
+srv_ver = vars.get_srv_version
 
-@pytest.mark.skipif((not (version == "5.0" and srv_version == "RedDatabase")), reason="Not supported")
+@pytest.mark.skipif((not (ver == "5.0" and srv_ver == "RedDatabase")), reason="Not supported")
 def test_cron(open_connection):
     lackey.click("tree_plus.png")
     lackey.rightClick("icon_jobs.png")

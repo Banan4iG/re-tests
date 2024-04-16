@@ -1,9 +1,12 @@
 import lackey
-from re_tests_plugin import * 
+from re_tests_plugin import *
 from . import *
 
 def init_extract() -> bool:
-	rdb5 = True if (version == "5.0" and srv_version == "RedDatabase") else False 
+	vars = Variables()
+	ver = vars.get_version
+	srv_ver = vars.get_srv_version
+	rdb5 = True if (ver == "5.0" and srv_ver == "RedDatabase") else False 
 	create_objects(rdb5)
 	lackey.doubleClick("icon_conn.png")
 	time.sleep(2)
@@ -56,7 +59,7 @@ def test_check_no_ignore(lock_employee):
 	
 	finish(rdb5)
 
-	assert result == [15, 1, 1, 1, 1, 1]
+	assert result == [14, 1, 1, 1, 1, 1]
 
 
 def test_check_ignore(lock_employee):

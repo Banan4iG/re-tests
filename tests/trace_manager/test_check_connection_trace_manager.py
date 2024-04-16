@@ -4,8 +4,10 @@ from re_tests_plugin import *
 conf_path = os.environ.get('TEMP') + "/" + "test_conf.conf"
 log_path = os.environ.get('TEMP') + "/" + "test_log.fbtrace_text"
 
+vars = Variables()
+srv_ver = vars.get_srv_version
 
-@pytest.mark.skipif(srv_version == "Firebird", reason="Not supported")
+@pytest.mark.skipif(srv_ver == "Firebird", reason="Not supported")
 def test_1(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")
@@ -73,7 +75,7 @@ def test_1(open_connection):
     assert result1 != None
 
 
-@pytest.mark.skipif(srv_version == "Firebird", reason="Not supported")
+@pytest.mark.skipif(srv_ver == "Firebird", reason="Not supported")
 def test_2(open_connection):
     lackey.click("tools.png")
     lackey.click("trace_manager.png")

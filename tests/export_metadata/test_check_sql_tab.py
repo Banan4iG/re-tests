@@ -5,6 +5,7 @@ from re_tests_plugin import *
 from . import create_objects
 import keyboard
 
+
 def start(rdb5: bool):
 	create_objects(rdb5)
 	list_con = list(lackey.findAll("icon_conn.png"))
@@ -76,7 +77,11 @@ def compare_db(test_base_path: str):
 	return result
 
 def test_save_script(lock_employee):
-	rdb5 = True if (version == "5.0" and srv_version == "RedDatabase") else False 
+	vars = Variables()
+	ver = vars.get_version
+	srv_ver = vars.get_srv_version
+	home = vars.home_directory
+	rdb5 = True if (ver == "5.0" and srv_ver == "RedDatabase") else False 
 	start(rdb5)
 	lackey.click("tab_SQL.png")
 	lackey.click("bt_save_script.png")
@@ -96,15 +101,15 @@ def test_save_script(lock_employee):
 	time.sleep(2)
 	with open(script_path, "r") as file:
 		context = file.read()
-	context = context.replace("employee", test_base_path).replace(f"{home_directory}examples\\empbuild\\file.ts", ts_path)
+	context = context.replace("employee", test_base_path).replace(f"{home}examples\\empbuild\\file.ts", ts_path)
 	with open(script_path, "w") as file:
 		file.write(context)
 	
 	con = fdb.create_database(test_base_path)
 	con.close()
 
-	print(home_directory)
-	subprocess.call(f"{home_directory}\isql -q -i \"{script_path}\"")
+	print(home)
+	subprocess.call(f"{home}\isql -q -i \"{script_path}\"")
 
 	create_connect(test_base_path)
 	result = compare_db(test_base_path)
@@ -116,7 +121,11 @@ def test_save_script(lock_employee):
 	assert result != None
 
 def test_execute_script(lock_employee):
-	rdb5 = True if (version == "5.0" and srv_version == "RedDatabase") else False 
+	vars = Variables()
+	ver = vars.get_version
+	srv_ver = vars.get_srv_version
+	home = vars.home_directory
+	rdb5 = True if (ver == "5.0" and srv_ver == "RedDatabase") else False 
 	test_base_path = os.environ.get('TEMP') + "\\test.fdb"
 	ts_path = os.environ.get('TEMP') + "\\file.ts"
 	files = [test_base_path, ts_path]
@@ -136,7 +145,7 @@ def test_execute_script(lock_employee):
 
 	lackey.type("f", lackey.Key.CTRL)
 	lackey.type("a", lackey.Key.CTRL)
-	lackey.App.setClipboard(f"{home_directory}examples\\empbuild\\file.ts")
+	lackey.App.setClipboard(f"{home}examples\\empbuild\\file.ts")
 	lackey.type("v", lackey.Key.CTRL)
 	lackey.type("{TAB}{SPACE}{TAB}")
 	lackey.App.setClipboard(ts_path)

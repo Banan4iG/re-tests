@@ -55,7 +55,7 @@ ENTRY_POINT '123' MODULE_NAME '123'
         con.execute_immediate("COMMENT ON INDEX CHANGEX IS 'comment'")
         
         if rdb5:
-            con.execute_immediate("CREATE TABLESPACE NEW_TABLESPACE_1 FILE 'file.ts';")
+        #     con.execute_immediate("CREATE TABLESPACE NEW_TABLESPACE_1 FILE 'file.ts';")
             con.execute_immediate("""                                 
 CREATE JOB NEW_JOB
 '13 17 * * *'

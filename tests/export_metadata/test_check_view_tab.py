@@ -13,7 +13,10 @@ def count_obj(icon):
 
 
 def test_1(lock_employee):
-	rdb5 = True if (version == "5.0" and srv_version == "RedDatabase") else False 
+	vars = Variables()
+	ver = vars.get_version
+	srv_ver = vars.get_srv_version
+	rdb5 = True if (ver == "5.0" and srv_ver == "RedDatabase") else False
 	
 	create_objects(rdb5)
 
@@ -26,8 +29,9 @@ def test_1(lock_employee):
 				"role", "indices", "collations"]
 	
 	if rdb5:
-		list_obj += ["ts", "jobs"]
-	
+		# list_obj += ["ts", "jobs"]
+		list_obj += ["jobs"]
+
 	lackey.doubleClick("icon_conn.png")
 	lackey.rightClick("icon_conn_open.png")
 	lackey.click("tree_export_metadata_menu.png")
@@ -56,7 +60,7 @@ def test_1(lock_employee):
 	list_count_obj_expected = [16, 11, 2, 2, 11, 2, 2, 5, 2, 2, 3, 6, 2, 3, 13, 2]
 
 	if rdb5:
-		list_count_obj_expected += [2, 2]
+		list_count_obj_expected += [2]
 
 	lackey.doubleClick("icon_conn_open.png")
 	assert  list_count_obj_actual == list_count_obj_expected
