@@ -2,7 +2,7 @@ import lackey
 import firebird.driver as fdb
 from subprocess import Popen, PIPE
 from re_tests_plugin import * 
-from . import create_objects
+from . import *
 import keyboard
 
 
@@ -26,7 +26,8 @@ def start(rdb5: bool):
 	lackey.click("bt_OK_blue.png")
 	time.sleep(0.5)
 
-def finish():
+def finish(rdb5: bool):
+	delete_objects(rdb5)
 	lackey.rightClick("tab_compare_db_blue.png")
 	lackey.click("bt_tab_close_all.png")
 	lackey.doubleClick("icon_disconnect_all.png")
@@ -101,7 +102,7 @@ def test_save_script(lock_employee):
 	time.sleep(2)
 	with open(script_path, "r") as file:
 		context = file.read()
-	context = context.replace("employee", test_base_path).replace(f"{home}examples\\empbuild\\file.ts", ts_path)
+	context = context.replace("employee.fdb", test_base_path).replace(f"{home}examples\\empbuild\\file.ts", ts_path)
 	with open(script_path, "w") as file:
 		file.write(context)
 	
@@ -114,7 +115,7 @@ def test_save_script(lock_employee):
 	create_connect(test_base_path)
 	result = compare_db(test_base_path)
 		
-	finish()
+	finish(rdb5)
 
 	delete_files(files)
 
@@ -163,7 +164,7 @@ def test_execute_script(lock_employee):
 
 	result = compare_db(test_base_path)
 
-	finish()
+	finish(rdb5)
 
 	delete_files(files)
 

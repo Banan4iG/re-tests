@@ -110,7 +110,7 @@ begin
   RETURN 'five';
 end
 """
-    with fdb.connect('employee,fdb') as con:
+    with fdb.connect('employee') as con:
         con.execute_immediate(script)
         con.commit()
     init_alter("icon_functions.png", "func_NEW_FUNC.png", reload=True)

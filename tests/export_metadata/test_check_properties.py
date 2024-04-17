@@ -2,6 +2,7 @@ import lackey
 from re_tests_plugin import *
 from . import *
 
+
 def init_extract() -> bool:
 	vars = Variables()
 	ver = vars.get_version
@@ -46,6 +47,7 @@ def extract():
 	lackey.type('c', lackey.Key.CTRL)
 
 def finish(rdb5: bool):
+	delete_objects(rdb5)
 	lackey.rightClick("tab_export_metadata_blue.png")
 	lackey.click("bt_tab_close_all.png")
 	lackey.doubleClick("icon_conn_open.png")
@@ -59,7 +61,7 @@ def test_check_no_ignore(lock_employee):
 	
 	finish(rdb5)
 
-	assert result == [14, 1, 1, 1, 1, 1]
+	assert result == [15, 1, 1, 1, 1, 1]
 
 
 def test_check_ignore(lock_employee):

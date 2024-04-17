@@ -68,8 +68,8 @@ end
 """)
         con.commit()
 
-# def delete_objects(rdb5: bool):
-#     with fdb.connect("employee") as con:
+def delete_objects(rdb5: bool):
+    with fdb.connect("employee") as con:
 
 #         #remove objects
 #         con.execute_immediate("DROP TABLE NEW_GLOBAL_TEMPORARY_1")
@@ -91,10 +91,10 @@ end
 #         con.execute_immediate("COMMENT ON EXCEPTION CUSTOMER_CHECK IS ''")
 #         con.execute_immediate("COMMENT ON INDEX CHANGEX IS ''")
 
-#         if rdb5:
-#             con.execute_immediate("DROP TABLESPACE NEW_TABLESPACE_1;")
-#             con.execute_immediate("DROP JOB NEW_JOB;")
-#         con.commit()
+        if rdb5:
+        #     con.execute_immediate("DROP TABLESPACE NEW_TABLESPACE_1;")
+            con.execute_immediate("DROP JOB NEW_JOB;")
+        con.commit()
 
 #sql script
 """
