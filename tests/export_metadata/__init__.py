@@ -94,7 +94,7 @@ def delete_objects(rdb5: bool):
         if rdb5:
         #     con.execute_immediate("DROP TABLESPACE NEW_TABLESPACE_1;")
             con.execute_immediate("DROP JOB NEW_JOB;")
-        con.commit()
+            con.commit()
 
 #sql script
 """
