@@ -30,6 +30,14 @@ def test_check_comparer_databases(open_connection):
     result1 = lackey.exists("text_Objects_to_create.png")
     lackey.click("bt_OK_blue.png")
     result2 = lackey.exists("text_Comparing_Finish_blue.png")
+    lackey.click("text_Output.png")
+    result3 = lackey.exists("text_SALES_INTEG.png")
+    lackey.click("text_View.png")
+    lackey.doubleClick("text_To_Create.png")
+    result4 = lackey.exists("text_Objects_Domains_Tables.png")
+    lackey.doubleClick("text_To_Create.png")
+    lackey.click("text_SQL.png")
+    result5 = lackey.exists("text_ALTER_TABLE.png")
     lackey.click("icon_cross.png")
     lackey.click("icon_cross.png")
     lackey.click("icon_cross.png")
@@ -41,3 +49,6 @@ def test_check_comparer_databases(open_connection):
     lackey.click("bt_yes.png")
     assert result1 != None
     assert result2 != None
+    assert result3 != None
+    assert result4 != None
+    assert result5 != None
